@@ -29,7 +29,7 @@ Key modes[MODE_SIZE][20] = {
 
 // Define normal mode key bindings here
 Key keys[] = {
-  // Mod                        Key                          // Command
+  /* Mod                        Key                           Command */
 
   // Applications {{{
   { Super,                      XK_Return,                   cmd(TERMINAL " -d $(xcwd)") },
