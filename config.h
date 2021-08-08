@@ -84,7 +84,7 @@ Key keys[] = {
   { Super,                      XK_d,                        cmd("j4-dmenu-desktop --dmenu=\"dmenu\"") }, // dmenu application launcher
   { Super|ShiftMask,            XK_d,                        cmd("passmenu --type -p 'pass :: '") },
 
-  { Super,                      XK_c,                        cmd("rofigreenclip") },
+  { Super,                      XK_c,                        cmd("clipmenu") },
 
   { Super,                      XK_n,                        cmd("dmenunotes") },
   
@@ -110,7 +110,7 @@ Key keys[] = {
   // Media controls
   { Super|ShiftMask,            XK_m,                        cmd("mic-toggle") },
   { 0,                          XF86XK_AudioForward,         cmd("mpc seek +10") },
-  { 0,                          XF86XK_AudioLowerVolume,     cmd("pamixer --allow-boost -d 3; sb-refresh sb-volume") },
+  { 0,                          XF86XK_AudioLowerVolume,     cmd("pamixer --allow-boost -d 3; sb-refresh sb-volume; canberra-gtk-play -i audio-volume-change") },
   { 0,                          XF86XK_AudioMedia,           cmd(TERMINAL " -e ncmpcpp") },
   { 0,                          XF86XK_AudioMicMute,         cmd("mic-toggle") },
   { 0,                          XF86XK_AudioMute,            cmd("pamixer -t; sb-refresh sb-volume") },
@@ -118,7 +118,7 @@ Key keys[] = {
   { 0,                          XF86XK_AudioPause,           cmd("mpc pause") },
   { 0,                          XF86XK_AudioPlay,            cmd("mpc play") },
   { 0,                          XF86XK_AudioPrev,            cmd("mpc prev") },
-  { 0,                          XF86XK_AudioRaiseVolume,     cmd("pamixer --allow-boost -i 3; sb-refresh sb-volume") },
+  { 0,                          XF86XK_AudioRaiseVolume,     cmd("pamixer --allow-boost -i 3; sb-refresh sb-volume; canberra-gtk-play -i audio-volume-change") },
   { 0,                          XF86XK_AudioRewind,          cmd("mpc seek -10") },
   { 0,                          XF86XK_AudioStop,            cmd("mpc stop") },
   
