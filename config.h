@@ -8,6 +8,7 @@ char shell[] = "/bin/sh";
 
 /* #define SCRIPT(str) cmd("~/scripts/" #str) */
 #define DWMLAYOUT(int) cmd("dwmc setlayout " #int)
+#define WEBCAM cmd("mpv --no-cache --no-osc --no-input-default-bindings --profile=low-latency --untimed --vf=hflip --no-keepaspect-window --panscan=1 --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)")
 #define NOOP cmd("")
 
 enum {
@@ -20,18 +21,18 @@ enum {
 // Define mode key bindings here
 // NOTE: "10" here is the maximum number of key bindings for each mode
 Key modes[MODE_SIZE][20] = {
-  [MusicPlayer] = { // {{{
+  [MusicPlayer] = { //
     { 0, XK_l,        cmd("mpc next") },
     { 0, XK_h,        cmd("mpc previous") },
     { 0, XK_space,    cmd("mpc pause") },
-  },// }}}
+  },
 };
 
 // Define normal mode key bindings here
 Key keys[] = {
   /* Mod                        Key                           Command */
 
-  // Applications {{{
+  // Applications
   { Super,                      XK_Return,                   cmd(TERMINAL " -d $(xcwd)") },
   { Super|ShiftMask,            XK_Return,                   cmd(TERMINAL) },
 
@@ -44,6 +45,7 @@ Key keys[] = {
   { Super,                      XK_r,                        cmd(TERMINAL " -d $(xcwd) -e lf-run") }, // lf file manager with image previews
   { Super|ShiftMask,            XK_r,                        cmd(TERMINAL " -e gotop") }, // System usage terminal applications
 
+  { Super,                      XK_apostrophe,               cmd("dwmc togglescratch 1")}, // Toggle bc calculator scratchpad
   { Super,                      XK_m,                        cmd("dwmc togglescratch 2")}, // Toggle ncmpcpp music player scratchpad
 
   { Super|ShiftMask,            XK_n,                        cmd(TERMINAL " -e newsboat; sb-refresh sb-news") }, // RSS newsfeed
@@ -53,9 +55,9 @@ Key keys[] = {
 
   { 0,                          XF86XK_Mail,                 cmd(TERMINAL " -e neomutt ; sb-refresh sb-mailbox") },
   { 0,                          XF86XK_WWW,                  cmd("$BROWSER") },
-  // }}}
+  
 
-  // Music player {{{
+  // Music player
   { Super,                      XK_minus,                    cmd("mpc volume -3") },
   { Super|ShiftMask,            XK_minus,                    cmd("mpc volume -12") },
 
@@ -76,18 +78,18 @@ Key keys[] = {
 
   { Super,                      XK_period,                   cmd("mpc next") },
   { Super|ShiftMask,            XK_period,                   cmd("mpc repeat") },
-  // }}}
+  
 
-  // Menus {{{
+  // Menus
   { Super,                      XK_d,                        cmd("j4-dmenu-desktop --dmenu=\"dmenu\"") }, // dmenu application launcher
   { Super|ShiftMask,            XK_d,                        cmd("passmenu --type -p 'pass :: '") },
 
   { Super,                      XK_c,                        cmd("rofigreenclip") },
 
   { Super,                      XK_n,                        cmd("dmenunotes") },
-  // }}}
+  
 
-  // System {{{
+  // System
   /* { 0,                          XF86XK_Battery,              cmd("") }, */
   { 0,                          XF86XK_Calculator,           cmd(TERMINAL " -e bc -l") },
   { 0,                          XF86XK_DOS,                  cmd(TERMINAL) },
@@ -103,9 +105,9 @@ Key keys[] = {
   { 0,                          XF86XK_TouchpadOn,           cmd("synclient TouchpadOff=0") },
   { 0,                          XF86XK_TouchpadToggle,       cmd("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") },
   //{ Super,                      XK_l,                        mode(Layout, False) },
-  // }}}
+  
 
-  // Media controls {{{
+  // Media controls
   { Super|ShiftMask,            XK_m,                        cmd("mic-toggle") },
   { 0,                          XF86XK_AudioForward,         cmd("mpc seek +10") },
   { 0,                          XF86XK_AudioLowerVolume,     cmd("pamixer --allow-boost -d 3; sb-refresh sb-volume") },
@@ -119,9 +121,9 @@ Key keys[] = {
   { 0,                          XF86XK_AudioRaiseVolume,     cmd("pamixer --allow-boost -i 3; sb-refresh sb-volume") },
   { 0,                          XF86XK_AudioRewind,          cmd("mpc seek -10") },
   { 0,                          XF86XK_AudioStop,            cmd("mpc stop") },
-  // }}}
+  
 
-  // Function keys {{{
+  // Function keys
   { Super,                      XK_F1,                       cmd("dmenucheatsheet") }, // Display cheatsheets
   { Super,                      XK_F2,                       cmd("dmenuunicode") }, // dmenu emoji keyboard
   { Super,                      XK_F3,                       cmd("feh --bg-fill --no-fehbg --random ~/Pics/wallpapers/*") }, // Set random wallpaper
@@ -133,15 +135,12 @@ Key keys[] = {
   { Super,                      XK_F8,                       cmd("mw -Y && sb-refresh sb-mailbox") }, // Refresh mutt wizard email
   { Super,                      XK_F9,                       cmd("dmenumount") }, // Mount devices, including USB drives using dmenu
   { Super,                      XK_F10,                      cmd("dmenuumount") }, // Unmount devices, including USB drives using dmenu
-  //Display webcam using mpv
-  { Super,                      XK_F11,                      cmd("mpv --no-cache --no-osc --no-input-default-bindings --profile=low-latency --untimed --vf=hflip --no-keepaspect-window --panscan=1 --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") },
+  { Super,                      XK_F11,                      WEBCAM }, // Display output of webcam using mpv
   { Super,                      XK_F12,                      cmd("remaps && notify-send \\\"⌨️ Keyboard remapping...\\\" \\\"Re-running keyboard defaults for any newly plugged-in keyboards.\\\"") },
-  // }}}
 
-  // Screenshot {{{
+  // Screenshot
   { 0,                          XK_Print,                    cmd("flameshot gui -p ~/Pics/screenshots") },
   { ShiftMask,                  XK_Print,                    cmd("flameshot full -p ~/Pics/screenshots") },
-  // }}}
 
 };
 
