@@ -25,7 +25,7 @@ enum {
 // Define mode key bindings here
 // NOTE: "10" here is the maximum number of key bindings for each mode
 Key modes[MODE_SIZE][20] = {
-  [Cheatsheets] = {
+  [Cheatsheets] = { // Super+`
     { 0, XK_1,        TERCHEAT("dwmbindings")},
     { 0, XK_2,        TERCHEAT("stbindings")},
     { 0, XK_3,        TERCHEAT("shotkey-list")},
@@ -45,11 +45,11 @@ Key modes[MODE_SIZE][20] = {
 Key keys[] = {
   /* Mod                        Key                           Command */
   // Applications
-  { Super,                      XK_Return,                   cmd(TERM) },
-  { Super|ShiftMask,            XK_Return,                   cmd(TERM " -d $(xcwd)") },
+  { Super,                      XK_Return,                   cmd(TERM) }, // Spawn default terminal (st)
+  { Super|ShiftMask,            XK_Return,                   cmd(TERM " -d $(xcwd)") }, // Spawn terminal in current working directory
 
-  { Super,                      XK_w,                        cmd("bookmarksurf") },
-  { Super|ShiftMask,            XK_w,                        cmd("$BROWSER") },
+  { Super,                      XK_w,                        cmd("bookmarksurf") }, // dmenu bookmark manager
+  { Super|ShiftMask,            XK_w,                        cmd("$BROWSER") }, // Default web browser (brave)
 
   { Super,                      XK_e,                        TERCMD(neomutt ; sb-refresh sb-mailbox) }, // Neomutt email client
   { Super|ShiftMask,            XK_e,                        TERCMD(abook) }, // Addressbook for neomutt
@@ -62,7 +62,7 @@ Key keys[] = {
 
   { Super|ShiftMask,            XK_n,                        TERCMD(newsboat; sb-refresh sb-news) }, // RSS newsfeed
 
-  { Super,                      XK_BackSpace,                cmd("sysact") },
+  { Super,                      XK_BackSpace,                cmd("sysact") }, // Powermenu
   /* { Super|ShiftMask,            XK_BackSpace,                cmd("") }, */
 
   { Super,                      XK_grave,                    mode(Cheatsheets, False) }, // Display cheatsheets
@@ -82,7 +82,7 @@ Key keys[] = {
   { Super|ShiftMask,            XK_equal,                    cmd("mpc volume +12") },
 
   { Super,                      XK_m,                        cmd("dwmc togglescratch 2")}, // Toggle ncmpcpp music player scratchpad
-  { Super|ShiftMask,            XK_m,                        cmd("mic-toggle") },
+  { Super|ShiftMask,            XK_m,                        cmd("mic-toggle") }, // Toggle microphone
 
   { Super,                      XK_minus,                    cmd("mpc volume -3") },
   { Super|ShiftMask,            XK_minus,                    cmd("mpc volume -12") },
@@ -96,11 +96,12 @@ Key keys[] = {
 
   // Menus
   { Super,                      XK_c,                        cmd("clipmenu") }, // dmenu clipboard history manager
+  /* { Super|ShiftMask,            XK_c,                        cmd("") }, */
 
   { Super,                      XK_d,                        cmd("j4-dmenu-desktop --dmenu=\"dmenu -c -l 8 -bw 2\"") }, // dmenu application launcher
-  { Super|ShiftMask,            XK_d,                        cmd("passmenu --type -p 'pass :: '") },
+  { Super|ShiftMask,            XK_d,                        cmd("passmenu --type -p 'pass :: '") }, // password manager and autotyper
 
-  { Super,                      XK_n,                        cmd("dmenunotes") },
+  { Super,                      XK_n,                        cmd("dmenunotes") }, // dmenu and markdown notes manager combo
 
 
   // System
@@ -131,7 +132,7 @@ Key keys[] = {
   { 0,                          XF86XK_AudioPause,           cmd("mpc pause") },
   { 0,                          XF86XK_AudioPlay,            cmd("mpc play") },
   { 0,                          XF86XK_AudioPrev,            cmd("mpc prev") },
-  { 0,                          XF86XK_AudioRaiseVolume,     cmd("pamixer --allow-boost -i 3; sb-refresh sb-volume; canberra-gtk-play -i audio-volume-change") },
+  { 0,                          XF86XK_AudioRaiseVolume,     cmd("pamixer -u; pamixer --allow-boost -i 3; sb-refresh sb-volume; canberra-gtk-play -i audio-volume-change") },
   { 0,                          XF86XK_AudioRewind,          cmd("mpc seek -10") },
   { 0,                          XF86XK_AudioStop,            cmd("mpc stop") },
 
