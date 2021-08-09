@@ -26,9 +26,9 @@ enum {
 // NOTE: "10" here is the maximum number of key bindings for each mode
 Key modes[MODE_SIZE][20] = {
   [Cheatsheets] = {
-    { 0, XK_F1,       TERCHEAT("dwmbindings")},
-    { 0, XK_F2,       TERCHEAT("stbindings")},
-    { 0, XK_F3,       TERCHEAT("shotkey-list")},
+    { 0, XK_1,        TERCHEAT("dwmbindings")},
+    { 0, XK_2,        TERCHEAT("stbindings")},
+    { 0, XK_3,        TERCHEAT("shotkey-list")},
   },
   [MusicPlayer] = {
     { 0, XK_l,        cmd("mpc next") },
