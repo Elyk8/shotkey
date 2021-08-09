@@ -50,8 +50,8 @@ Key keys[] = {
 
   { Super|ShiftMask,            XK_n,                        cmd(TERMINAL " -e newsboat; sb-refresh sb-news") }, // RSS newsfeed
 
-  { Super,                      XK_BackSpace,                cmd("rofipowermenu") },
-  { Super|ShiftMask,            XK_BackSpace,                cmd("rofipowermenu") },
+  { Super,                      XK_BackSpace,                cmd("sysact") },
+  /* { Super|ShiftMask,            XK_BackSpace,                cmd("") }, */
 
   { 0,                          XF86XK_Mail,                 cmd(TERMINAL " -e neomutt ; sb-refresh sb-mailbox") },
   { 0,                          XF86XK_WWW,                  cmd("$BROWSER") },
@@ -81,10 +81,10 @@ Key keys[] = {
   
 
   // Menus
-  { Super,                      XK_d,                        cmd("j4-dmenu-desktop --dmenu=\"dmenu\"") }, // dmenu application launcher
+  { Super,                      XK_d,                        cmd("j4-dmenu-desktop --dmenu=\"dmenu -c -l 8 -bw 2\"") }, // dmenu application launcher
   { Super|ShiftMask,            XK_d,                        cmd("passmenu --type -p 'pass :: '") },
 
-  { Super,                      XK_c,                        cmd("clipmenu") },
+  { Super,                      XK_c,                        cmd("clipmenu") }, // dmenu clipboard history manager
 
   { Super,                      XK_n,                        cmd("dmenunotes") },
   
@@ -97,7 +97,7 @@ Key keys[] = {
   { 0,                          XF86XK_MonBrightnessDown,    cmd("xbacklight -dec 2 ; sb-refresh sb-brightness") },
   { 0,                          XF86XK_MonBrightnessUp,      cmd("xbacklight -inc 2 ; sb-refresh sb-brightness") },
   { 0,                          XF86XK_MyComputer,           cmd(TERMINAL " -d $(xcwd) -e lf-run") },
-  { 0,                          XF86XK_PowerOff,             cmd("rofipowermenu") },
+  { 0,                          XF86XK_PowerOff,             cmd("sysact") },
   { 0,                          XF86XK_ScreenSaver,          cmd("slock & xset dpms force off; mpc pause; pauseallmpv") },
   { 0,                          XF86XK_Sleep,                cmd("sudo -A zzz") },
   { 0,                          XF86XK_TaskPane,             cmd(TERMINAL " -e gotop") },
