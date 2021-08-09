@@ -45,8 +45,8 @@ Key modes[MODE_SIZE][20] = {
 Key keys[] = {
   /* Mod                        Key                           Command */
   // Applications
-  { Super,                      XK_Return,                   cmd(TERM " -d $(xcwd)") },
-  { Super|ShiftMask,            XK_Return,                   cmd(TERM) },
+  { Super,                      XK_Return,                   cmd(TERM) },
+  { Super|ShiftMask,            XK_Return,                   cmd(TERM " -d $(xcwd)") },
 
   { Super,                      XK_w,                        cmd("bookmarksurf") },
   { Super|ShiftMask,            XK_w,                        cmd("$BROWSER") },
@@ -58,26 +58,17 @@ Key keys[] = {
   { Super|ShiftMask,            XK_r,                        TERCMD(gotop) }, // System usage terminal applications
 
   { Super,                      XK_apostrophe,               cmd("dwmc togglescratch 1")}, // Toggle bc calculator scratchpad
-  { Super,                      XK_m,                        cmd("dwmc togglescratch 2")}, // Toggle ncmpcpp music player scratchpad
+  /* { Super,                      XK_apostrophe,               cmd("")}, */
 
   { Super|ShiftMask,            XK_n,                        TERCMD(newsboat; sb-refresh sb-news) }, // RSS newsfeed
 
   { Super,                      XK_BackSpace,                cmd("sysact") },
   /* { Super|ShiftMask,            XK_BackSpace,                cmd("") }, */
 
-  { 0,                          XF86XK_Mail,                 TERCMD(neomutt ; sb-refresh sb-mailbox) },
-  { 0,                          XF86XK_WWW,                  cmd("$BROWSER") },
+  { Super,                      XK_grave,                    mode(Cheatsheets, False) }, // Display cheatsheets
+  /* { Super|ShiftMask,            XK_grave,                    cmd("") }, */
 
   // Music player
-  { Super,                      XK_minus,                    cmd("mpc volume -3") },
-  { Super|ShiftMask,            XK_minus,                    cmd("mpc volume -12") },
-
-  { Super,                      XK_equal,                    cmd("mpc volume +3") },
-  { Super|ShiftMask,            XK_equal,                    cmd("mpc volume +12") },
-
-  { Super,                      XK_p,                        cmd("mpc toggle") },
-  { Super|ShiftMask,            XK_p,                        cmd("mpc pause ; pauseallmpv") },
-
   { Super,                      XK_bracketleft,              cmd("mpc seek -10") },
   { Super|ShiftMask,            XK_bracketleft,              cmd("mpc seek -60") },
 
@@ -87,22 +78,37 @@ Key keys[] = {
   { Super,                      XK_comma,                    cmd("mpc prev") },
   { Super|ShiftMask,            XK_comma,                    cmd("mpc seek 0%") },
 
+  { Super,                      XK_equal,                    cmd("mpc volume +3") },
+  { Super|ShiftMask,            XK_equal,                    cmd("mpc volume +12") },
+
+  { Super,                      XK_m,                        cmd("dwmc togglescratch 2")}, // Toggle ncmpcpp music player scratchpad
+  { Super|ShiftMask,            XK_m,                        cmd("mic-toggle") },
+
+  { Super,                      XK_minus,                    cmd("mpc volume -3") },
+  { Super|ShiftMask,            XK_minus,                    cmd("mpc volume -12") },
+
+  { Super,                      XK_p,                        cmd("mpc toggle") },
+  { Super|ShiftMask,            XK_p,                        cmd("mpc pause ; pauseallmpv") },
+
   { Super,                      XK_period,                   cmd("mpc next") },
+
   { Super|ShiftMask,            XK_period,                   cmd("mpc repeat") },
 
   // Menus
+  { Super,                      XK_c,                        cmd("clipmenu") }, // dmenu clipboard history manager
+
   { Super,                      XK_d,                        cmd("j4-dmenu-desktop --dmenu=\"dmenu -c -l 8 -bw 2\"") }, // dmenu application launcher
   { Super|ShiftMask,            XK_d,                        cmd("passmenu --type -p 'pass :: '") },
 
-  { Super,                      XK_c,                        cmd("clipmenu") }, // dmenu clipboard history manager
-
   { Super,                      XK_n,                        cmd("dmenunotes") },
+
 
   // System
   /* { 0,                          XF86XK_Battery,              cmd("") }, */
   { 0,                          XF86XK_Calculator,           TERCMD(bc -l) },
   { 0,                          XF86XK_DOS,                  cmd(TERM) },
   { 0,                          XF86XK_Launch1,              cmd("xset dpms force off") },
+  { 0,                          XF86XK_Mail,                 TERCMD(neomutt ; sb-refresh sb-mailbox) },
   { 0,                          XF86XK_MonBrightnessDown,    cmd("xbacklight -dec 2 ; sb-refresh sb-brightness") },
   { 0,                          XF86XK_MonBrightnessUp,      cmd("xbacklight -inc 2 ; sb-refresh sb-brightness") },
   { 0,                          XF86XK_MyComputer,           cmd(TERM " -d $(xcwd) -e lf-run") },
@@ -113,10 +119,9 @@ Key keys[] = {
   { 0,                          XF86XK_TouchpadOff,          cmd("synclient TouchpadOff=1") },
   { 0,                          XF86XK_TouchpadOn,           cmd("synclient TouchpadOff=0") },
   { 0,                          XF86XK_TouchpadToggle,       cmd("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") },
-  //{ Super,                      XK_l,                        mode(Layout, False) },
+  { 0,                          XF86XK_WWW,                  cmd("$BROWSER") },
 
   // Media controls
-  { Super|ShiftMask,            XK_m,                        cmd("mic-toggle") },
   { 0,                          XF86XK_AudioForward,         cmd("mpc seek +10") },
   { 0,                          XF86XK_AudioLowerVolume,     cmd("pamixer --allow-boost -d 3; sb-refresh sb-volume; canberra-gtk-play -i audio-volume-change") },
   { 0,                          XF86XK_AudioMedia,           TERCMD(ncmpcpp) },
@@ -131,11 +136,11 @@ Key keys[] = {
   { 0,                          XF86XK_AudioStop,            cmd("mpc stop") },
 
   // Function keys
-  { Super,                      XK_F1,                       mode(Cheatsheets, False) }, // Display cheatsheets
+  /* { Super,                      XK_F1,                       cmd("") }, */
   { Super,                      XK_F2,                       cmd("dmenuunicode") }, // dmenu emoji keyboard
   { Super,                      XK_F3,                       cmd("feh --bg-fill --no-fehbg --random ~/Pics/wallpapers/*") }, // Set random wallpaper
   { Super,                      XK_F4,                       cmd("pavucontrol; sb-refresh sb-volume") }, // Volume mixer
-  { Super,                      XK_F5,                       cmd("start-conky") }, // Toggle conky, a computer specs and statistics display
+  { Super,                      XK_F5,                       cmd("toggle-conky") }, // Toggle conky, a computer specs and statistics display
   /* { Super,                      XK_F6,                       cmd("") },  */
   /* { Super,                      XK_F7,                       cmd("") },  */
   { Super,                      XK_F8,                       cmd("mw -Y && sb-refresh sb-mailbox") }, // Refresh mutt wizard email
