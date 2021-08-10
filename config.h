@@ -8,13 +8,12 @@ char shell[] = "/bin/sh";
 
 /* #define SCRIPT(str) cmd("~/scripts/" #str) */
 #define TERCMD(str) cmd(TERM " -e " #str)
-#define TERCHEAT(str) cmd(TERM " -n cheatsheet -g 120x30 -e " #str)
 #define DWMLAYOUT(int) cmd("dwmc setlayout " #int)
 #define WEBCAM cmd("mpv --no-cache --no-osc --no-input-default-bindings --profile=low-latency --untimed --vf=hflip --no-keepaspect-window --panscan=1 --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)")
 #define NOOP cmd("")
 
 enum {
-  Cheatsheets,
+  /* Cheatsheets, */
   MusicPlayer,
   Screenshot,
 
@@ -25,11 +24,6 @@ enum {
 // Define mode key bindings here
 // NOTE: "10" here is the maximum number of key bindings for each mode
 Key modes[MODE_SIZE][20] = {
-  [Cheatsheets] = { // Super+`
-    { 0, XK_1,        TERCHEAT("dwmbindings")},
-    { 0, XK_2,        TERCHEAT("stbindings")},
-    { 0, XK_3,        TERCHEAT("shotkey-list")},
-  },
   [MusicPlayer] = {
     { 0, XK_l,        cmd("mpc next") },
     { 0, XK_h,        cmd("mpc previous") },
@@ -65,9 +59,6 @@ Key keys[] = {
   { Super,                      XK_BackSpace,                cmd("sysact") }, // Powermenu
   /* { Super|ShiftMask,            XK_BackSpace,                cmd("") }, */
 
-  { Super,                      XK_grave,                    mode(Cheatsheets, False) }, // Display cheatsheets
-  /* { Super|ShiftMask,            XK_grave,                    cmd("") }, */
-
   // Music player
   { Super,                      XK_bracketleft,              cmd("mpc seek -10") },
   { Super|ShiftMask,            XK_bracketleft,              cmd("mpc seek -60") },
@@ -102,6 +93,9 @@ Key keys[] = {
   { Super|ShiftMask,            XK_d,                        cmd("passmenu --type -p 'pass :: '") }, // password manager and autotyper
 
   { Super,                      XK_n,                        cmd("dmenunotes") }, // dmenu and markdown notes manager combo
+
+  { Super,                      XK_grave,                    cmd("dmenucheatsheets") }, // Display cheatsheets
+  /* { Super|ShiftMask,            XK_grave,                    cmd("") }, */
 
 
   // System
@@ -139,7 +133,7 @@ Key keys[] = {
   // Function keys
   /* { Super,                      XK_F1,                       cmd("") }, */
   { Super,                      XK_F2,                       cmd("dmenuunicode") }, // dmenu emoji keyboard
-  { Super,                      XK_F3,                       cmd("feh --bg-fill --no-fehbg --random ~/Pics/wallpapers/*") }, // Set random wallpaper
+  { Super,                      XK_F3,                       cmd("feh --bg-fill --random ~/Pics/wallpapers") }, // Set random wallpaper
   { Super,                      XK_F4,                       cmd("pavucontrol; sb-refresh sb-volume") }, // Volume mixer
   { Super,                      XK_F5,                       cmd("toggle-conky") }, // Toggle conky, a computer specs and statistics display
   /* { Super,                      XK_F6,                       cmd("") },  */
@@ -154,7 +148,7 @@ Key keys[] = {
 };
 
 ModeProperties mode_properties[MODE_SIZE] = {
-  [Cheatsheets] = { "📋" },
+  /* [Cheatsheets] = { "📋" }, */
   [MusicPlayer] = { "🎹" },
   [Screenshot] = { "📷" }
 };
