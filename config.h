@@ -38,7 +38,7 @@ Key modes[MODE_SIZE][20] = {
     { 0, XK_u,          cmd("dmenuumount") },
     { 0, XK_n,          cmd("dmenunotes") },
     { 0, XK_r,          cmd("dmenurecord") },
-    { 0, XK_p,          cmd("passmenu --type -p 'pass :: '") },
+    { 0, XK_p,          cmd("passmenu --type -p 'ﳳ :: '") },
     { 0, XK_space,      cmd("j4-dmenu-desktop --dmenu=\"dmenu -c -l 8 -bw 2\"") },
   },
   [MusicPlayer] = {
