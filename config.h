@@ -24,7 +24,7 @@ enum {
 };
 
 // Define mode key bindings here
-// NOTE: "10" here is the maximum number of key bindings for each mode
+// NOTE: "20" here is the maximum number of key bindings for each mode
 Key modes[MODE_SIZE][20] = {
   // KEY MODES
 
@@ -75,10 +75,9 @@ Key modes[MODE_SIZE][20] = {
   },
 };
 
-// Define normal mode key bindings here
 Key keys[] = {
 
-  // NORMAL MODE
+  // NORMAL MODE (No modifiers enabled)
 
   /* Mod                        Key                           Command */
   // Applications
