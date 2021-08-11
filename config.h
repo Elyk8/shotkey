@@ -48,23 +48,23 @@ Key modes[MODE_SIZE][20] = {
     { 0, XK_space,      cmd("j4-dmenu-desktop --dmenu=\"dmenu -c -l 8 -bw 2\"") }, // Application launcher
   },
 
-  // Music mode. Toggle using [Super+m]. Press any other key to go back to normal mode
+  // Music mode. Toggle using [Super+m] and hold super. Press any other key to go back to normal mode
   [MusicPlayer] = {
-    { 0,          XK_comma,         cmd("mpc seek -10") }, // Backward 10 secs
-    { 0,          XK_period,        cmd("mpc seek +10") }, // Forward 10 secs
-    { 0,          XK_bracketleft,   cmd("mpc seek -60") }, // Backward 60 secs
-    { 0,          XK_bracketright,  cmd("mpc seek +60") }, // Forward 60 secs
-    { 0,          XK_0,             cmd("mpc seek 0%") }, // Restart song
-    { 0,          XK_k,             cmd("mpc volume +3") }, // Volume up +3
-    { ShiftMask,  XK_k,             cmd("mpc volume +12") }, // Volume up +12
-    { 0,          XK_j,             cmd("mpc volume -3") }, // Volume down -3
-    { ShiftMask,  XK_j,             cmd("mpc volume -12") }, // Volume down -12
-    { 0,          XK_l,             cmd("mpc next") }, // Next song
-    { 0,          XK_h,             cmd("mpc prev") }, // Previous song
-    { 0,          XK_m,             cmd("dwmc togglescratch 2") }, // Open ncmpcpp
-    { 0,          XK_space,         cmd("mpc toggle") }, // Pause/play
-    { 0,          XK_s,             cmd("mpc pause ; pauseallmpv") }, // Stop
-    { 0,          XK_r,             cmd("mpc repeat") }, // Toggle repeat mode
+    { Super,            XK_comma,         cmd("mpc seek -10") }, // Backward 10 secs
+    { Super,            XK_period,        cmd("mpc seek +10") }, // Forward 10 secs
+    { Super,            XK_bracketleft,   cmd("mpc seek -60") }, // Backward 60 secs
+    { Super,            XK_bracketright,  cmd("mpc seek +60") }, // Forward 60 secs
+    { Super,            XK_0,             cmd("mpc seek 0%") }, // Restart song
+    { Super,            XK_k,             cmd("mpc volume +3") }, // Volume up +3
+    { Super|ShiftMask,  XK_k,             cmd("mpc volume +12") }, // Volume up +12
+    { Super,            XK_j,             cmd("mpc volume -3") }, // Volume down -3
+    { Super|ShiftMask,  XK_j,             cmd("mpc volume -12") }, // Volume down -12
+    { Super,            XK_l,             cmd("mpc next") }, // Next song
+    { Super,            XK_h,             cmd("mpc prev") }, // Previous song
+    { Super,            XK_m,             cmd("dwmc togglescratch 2") }, // Open ncmpcpp
+    { Super,            XK_space,         cmd("mpc toggle") }, // Pause/play
+    { Super,            XK_s,             cmd("mpc pause ; pauseallmpv") }, // Stop
+    { Super,            XK_r,             cmd("mpc repeat") }, // Toggle repeat mode
   },
 
   // Screenshot mode, using flameshot. Use [PrintScreen] to toggle once.
