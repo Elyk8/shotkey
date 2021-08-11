@@ -30,9 +30,9 @@ Key modes[MODE_SIZE][20] = {
 
   // Cheatsheet mode. Toggle once using [Super+`]
   [Cheatsheets] = {
-    { 0, XK_1,          TERCHEAT("$HOME/.local/bin/cheatsheets/dwmbindings") }, // dwm window managementbindings
-    { 0, XK_2,          TERCHEAT("$HOME/.local/bin/cheatsheets/shotkey-list") }, // shotkey applications key binds list
-    { 0, XK_3,          TERCHEAT("$HOME/.local/bin/cheatsheets/stbindings") }, // st terminal key bindings
+    { 0, XK_1,          TERCHEAT("dwmbindings") }, // dwm window managementbindings
+    { 0, XK_2,          TERCHEAT("shotkey-list") }, // shotkey applications key binds list
+    { 0, XK_3,          TERCHEAT("stbindings") }, // st terminal key bindings
   },
 
   // dmenu scripts mode. Toggle once using [Super+p]
