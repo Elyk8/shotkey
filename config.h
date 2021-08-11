@@ -30,9 +30,9 @@ Key modes[MODE_SIZE][20] = {
 
   // Cheatsheet mode. Toggle once using [Super+`]
   [Cheatsheets] = {
-    { 0, XK_1,          TERCHEAT("$HOME/.local/lib/cheatsheets/dwmbindings") },
-    { 0, XK_2,          TERCHEAT("$HOME/.local/lib/cheatsheets/shotkey-list") },
-    { 0, XK_3,          TERCHEAT("$HOME/.local/lib/cheatsheets/stbindings") },
+    { 0, XK_1,          TERCHEAT("$HOME/.local/bin/cheatsheets/dwmbindings") }, // dwm window managementbindings
+    { 0, XK_2,          TERCHEAT("$HOME/.local/bin/cheatsheets/shotkey-list") }, // shotkey applications key binds list
+    { 0, XK_3,          TERCHEAT("$HOME/.local/bin/cheatsheets/stbindings") }, // st terminal key bindings
   },
 
   // dmenu scripts mode. Toggle once using [Super+p]
@@ -50,22 +50,21 @@ Key modes[MODE_SIZE][20] = {
 
   // Music mode. Toggle using [Super+m]. Press any other key to go back to normal mode
   [MusicPlayer] = {
-    { 0,          XK_comma,         cmd("mpc seek -10") },
-    { 0,          XK_period,        cmd("mpc seek +10") },
-    { 0,          XK_bracketleft,   cmd("mpc seek -60") },
-    { 0,          XK_bracketright,  cmd("mpc seek +60") },
-    { 0,          XK_0,             cmd("mpc seek 0%") },
-    { 0,          XK_k,             cmd("mpc volume +3") },
-    { ShiftMask,  XK_k,             cmd("mpc volume +12") },
-    { 0,          XK_j,             cmd("mpc volume -3") },
-    { ShiftMask,  XK_j,             cmd("mpc volume -12") },
-    { 0,          XK_l,             cmd("mpc next") },
-    { 0,          XK_h,             cmd("mpc previous") },
-    { 0,          XK_m,             cmd("dwmc togglescratch 2")}, // Toggle ncmpcpp music player scratchpad 
-    { 0,          XK_space,         cmd("mpc pause") },
-    { 0,          XK_p,             cmd("mpc toggle") },
-    { 0,          XK_s,             cmd("mpc pause ; pauseallmpv") },
-    { 0,          XK_r,             cmd("mpc repeat") },
+    { 0,          XK_comma,         cmd("mpc seek -10") }, // Backward 10 secs
+    { 0,          XK_period,        cmd("mpc seek +10") }, // Forward 10 secs
+    { 0,          XK_bracketleft,   cmd("mpc seek -60") }, // Backward 60 secs
+    { 0,          XK_bracketright,  cmd("mpc seek +60") }, // Forward 60 secs
+    { 0,          XK_0,             cmd("mpc seek 0%") }, // Restart song
+    { 0,          XK_k,             cmd("mpc volume +3") }, // Volume up +3
+    { ShiftMask,  XK_k,             cmd("mpc volume +12") }, // Volume up +12
+    { 0,          XK_j,             cmd("mpc volume -3") }, // Volume down -3
+    { ShiftMask,  XK_j,             cmd("mpc volume -12") }, // Volume down -12
+    { 0,          XK_l,             cmd("mpc next") }, // Next song
+    { 0,          XK_h,             cmd("mpc prev") }, // Previous song
+    { 0,          XK_m,             cmd("dwmc togglescratch 2") }, // Open ncmpcpp
+    { 0,          XK_space,         cmd("mpc toggle") }, // Pause/play
+    { 0,          XK_s,             cmd("mpc pause ; pauseallmpv") }, // Stop
+    { 0,          XK_r,             cmd("mpc repeat") }, // Toggle repeat mode
   },
 
   // Screenshot mode, using flameshot. Use [PrintScreen] to toggle once.
