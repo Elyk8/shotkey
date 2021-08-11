@@ -26,21 +26,29 @@ enum {
 // Define mode key bindings here
 // NOTE: "10" here is the maximum number of key bindings for each mode
 Key modes[MODE_SIZE][20] = {
+  // KEY MODES
+
+  // Cheatsheet mode. Toggle once using [Super+`]
   [Cheatsheets] = {
     { 0, XK_1,          TERCHEAT("$HOME/.local/lib/cheatsheets/dwmbindings") },
     { 0, XK_2,          TERCHEAT("$HOME/.local/lib/cheatsheets/shotkey-list") },
     { 0, XK_3,          TERCHEAT("$HOME/.local/lib/cheatsheets/stbindings") },
   },
+
+  // dmenu scripts mode. Toggle once using [Super+p]
   [dmenuScripts] = {
-    { 0, XK_b,          cmd("bookmarksurf") },
-    { 0, XK_k,          cmd("dmenukill") },
-    { 0, XK_o,          cmd("dmenumount") },
-    { 0, XK_u,          cmd("dmenuumount") },
-    { 0, XK_n,          cmd("dmenunotes") },
-    { 0, XK_r,          cmd("dmenurecord") },
-    { 0, XK_p,          cmd("passmenu --type -p 'ﳳ :: '") },
-    { 0, XK_space,      cmd("j4-dmenu-desktop --dmenu=\"dmenu -c -l 8 -bw 2\"") },
+    { 0, XK_b,          cmd("bookmarksurf") }, // Open dmenu bookmarks manager
+    { 0, XK_e,          cmd("dmenuunicode") }, // Open emoji keymode
+    { 0, XK_k,          cmd("dmenukill") }, // List applications to terminate
+    { 0, XK_o,          cmd("dmenumount") }, // Asks to mount drives, including USBs and a Android devices
+    { 0, XK_u,          cmd("dmenuumount") }, // Unmount any drive
+    { 0, XK_n,          cmd("dmenunotes") }, // Open markdown notes manager
+    { 0, XK_r,          cmd("dmenurecord") }, // Record using dmenu
+    { 0, XK_p,          cmd("passmenu --type -p 'ﳳ :: '") }, // Open password manager and autotyper
+    { 0, XK_space,      cmd("j4-dmenu-desktop --dmenu=\"dmenu -c -l 8 -bw 2\"") }, // Application launcher
   },
+
+  // Music mode. Toggle using [Super+m]. Press any other key to go back to normal mode
   [MusicPlayer] = {
     { 0,          XK_comma,         cmd("mpc seek -10") },
     { 0,          XK_period,        cmd("mpc seek +10") },
@@ -59,6 +67,8 @@ Key modes[MODE_SIZE][20] = {
     { 0,          XK_s,             cmd("mpc pause ; pauseallmpv") },
     { 0,          XK_r,             cmd("mpc repeat") },
   },
+
+  // Screenshot mode, using flameshot. Use [PrintScreen] to toggle once.
   [Screenshot] = {
     { 0, XK_g,          cmd("flameshot gui -p ~/Pics/screenshots") },
     { 0, XK_f,          cmd("flameshot full -p ~/Pics/screenshots") },
@@ -67,13 +77,16 @@ Key modes[MODE_SIZE][20] = {
 
 // Define normal mode key bindings here
 Key keys[] = {
+
+  // NORMAL MODE
+
   /* Mod                        Key                           Command */
   // Applications
   { Super,                      XK_Return,                    cmd(TERM) }, // Spawn default terminal (st)
   { Super|ShiftMask,            XK_Return,                    cmd(TERM " -d $(xcwd)") }, // Spawn terminal in current working directory
 
-  { Super,                      XK_w,                         cmd("$BROWSER") }, // dmenu bookmark manager
-  /* { Super|ShiftMask,            XK_w,                         cmd("") }, // Default web browser (brave) */
+  { Super,                      XK_w,                         cmd("$BROWSER") }, // Default web browser (brave)
+  /* { Super|ShiftMask,            XK_w,                         cmd("") },  */
 
   { Super,                      XK_e,                         TERCMD(neomutt ; sb-refresh sb-mailbox) }, // Neomutt email client
   { Super|ShiftMask,            XK_e,                         TERCMD(abook) }, // Addressbook for neomutt
@@ -97,8 +110,10 @@ Key keys[] = {
   // Menus
   { Super,                      XK_c,                         cmd("clipmenu") }, // dmenu clipboard history manager
   /* { Super|ShiftMask,            XK_c,                         cmd("") }, */
+
   { Super,                      XK_p,                         mode(dmenuScripts, False) },
   /* { Super|ShiftMask,            XK_p,                         cmd("") }, */
+
   { Super,                      XK_grave,                     mode(Cheatsheets, False) }, // Display cheatsheets
   /* { Super|ShiftMask,            XK_grave,                     cmd("") }, */
 
@@ -136,7 +151,7 @@ Key keys[] = {
 
   // Function keys
   /* { Super,                      XK_F1,                        cmd("") }, */
-  { Super,                      XK_F2,                        cmd("dmenuunicode") }, // dmenu emoji keyboard
+  /* { Super,                      XK_F2,                        cmd("") }, */
   { Super,                      XK_F3,                        cmd("feh --bg-fill --random ~/Pics/wallpapers") }, // Set random wallpaper
   { Super,                      XK_F4,                        cmd("pavucontrol; sb-refresh sb-volume") }, // Volume mixer
   { Super,                      XK_F5,                        cmd("toggle-conky") }, // Toggle conky, a computer specs and statistics display
