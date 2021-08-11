@@ -45,7 +45,6 @@ Key modes[MODE_SIZE][20] = {
     { 0, XK_n,          cmd("dmenunotes") }, // Open markdown notes manager
     { 0, XK_r,          cmd("dmenurecord") }, // Record using dmenu
     { 0, XK_p,          cmd("passmenu --type -p 'ﳳ :: '") }, // Open password manager and autotyper
-    { 0, XK_space,      cmd("j4-dmenu-desktop --dmenu=\"dmenu -c -l 8 -bw 2\"") }, // Application launcher
   },
 
   // Music mode. Toggle using [Super+m] and hold super. Press any other key to go back to normal mode
@@ -103,11 +102,12 @@ Key keys[] = {
 
   // Music player
   { Super,                      XK_m,                         mode(MusicPlayer, True) },
-  { Super|ShiftMask,            XK_m,                         cmd("mic-toggle") }, // Toggle microphone
 
   // Menus
   { Super,                      XK_c,                         cmd("clipmenu") }, // dmenu clipboard history manager
   /* { Super|ShiftMask,            XK_c,                         cmd("") }, */
+
+  { Super,                      XK_d,                         cmd("j4-dmenu-desktop --dmenu=\"dmenu -c -l 8 -bw 2\"") }, // Application launcher
 
   { Super,                      XK_p,                         mode(dmenuScripts, False) },
   /* { Super|ShiftMask,            XK_p,                         cmd("") }, */
@@ -148,18 +148,18 @@ Key keys[] = {
   { 0,                          XF86XK_AudioStop,             cmd("mpc stop") },
 
   // Function keys
-  /* { Super,                      XK_F1,                        cmd("") }, */
-  /* { Super,                      XK_F2,                        cmd("") }, */
-  { Super,                      XK_F3,                        cmd("feh --bg-fill --random ~/Pics/wallpapers") }, // Set random wallpaper
-  { Super,                      XK_F4,                        cmd("pavucontrol; sb-refresh sb-volume") }, // Volume mixer
-  { Super,                      XK_F5,                        cmd("toggle-conky") }, // Toggle conky, a computer specs and statistics display
+  { Super,                      XK_F1,                        cmd("sxiv -r -q -t -o ~/Pics/wallpapers/*") },
+  { Super,                      XK_F2,                        cmd("find ~/Pics/wallpapers/ -type f | shuf -n 1 | xargs xwallpaper --zoom") }, // Set random wallpaper
+  { Super,                      XK_F3,                        cmd("pavucontrol; sb-refresh sb-volume") }, // Volume mixer
+  { Super,                      XK_F4,                        cmd("toggle-conky") }, // Toggle conky, a computer specs and statistics display
+  { Super,                      XK_F5,                        cmd("mw -Y && sb-refresh sb-mailbox") }, // Refresh mutt wizard email
   /* { Super,                      XK_F6,                        cmd("") },  */
   /* { Super,                      XK_F7,                        cmd("") },  */
-  { Super,                      XK_F8,                        cmd("mw -Y && sb-refresh sb-mailbox") }, // Refresh mutt wizard email
-  { Super,                      XK_F9,                        cmd("dmenumount") }, // Mount devices, including USB drives using dmenu
-  { Super,                      XK_F10,                       cmd("dmenuumount") }, // Unmount devices, including USB drives using dmenu
-  { Super,                      XK_F11,                       WEBCAM }, // Display output of webcam using mpv
-  { Super,                      XK_F12,                       cmd("remaps && notify-send \\\"⌨️ Keyboard remapping...\\\" \\\"Re-running keyboard defaults for any newly plugged-in keyboards.\\\"") },
+  /* { Super,                      XK_F8,                        cmd("") }, */
+  /* { Super,                      XK_F9,                        cmd("") }, */
+  /* { Super,                      XK_F10,                       cmd("") }, */
+  { Super,                      XK_F11,                       cmd("remaps && notify-send \\\"⌨️ Keyboard remapping...\\\" \\\"Re-running keyboard defaults for any newly plugged-in keyboards.\\\"") },
+  { Super,                      XK_F12,                       WEBCAM }, // Display output of webcam using mpv
   // Screenshot
   { 0,                          XK_Print,                     mode(Screenshot, False) }, // Toggle flameshot mode
 };
