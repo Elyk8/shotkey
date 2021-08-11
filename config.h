@@ -46,6 +46,7 @@ Key modes[MODE_SIZE][20] = {
     { 0, XK_p,          cmd("passmenu --type -p 'ﳳ :: '") }, // Open password manager and autotyper
     { 0, XK_r,          cmd("dm-record") }, // Record using dmenu
     { 0, XK_u,          cmd("dm-umount") }, // Unmount any drive
+    { 0, XK_u,          cmd("dm-yt") }, // Youtube client dmenu
   },
 
   // Music mode. Toggle using [Super+m] and hold super. Press any other key to go back to normal mode
