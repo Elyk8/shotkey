@@ -166,10 +166,10 @@ Key keys[] = {
 };
 
 ModeProperties mode_properties[MODE_SIZE] = {
-  [Cheatsheets] = { "📋" },
-  [dmenuScripts] = { "📚" },
-  [MusicPlayer] = { "🎹" },
-  [Screenshot] = { "📷" }
+  [Cheatsheets] = { "Cheatsheet" },
+  [dmenuScripts] = { "Dmenu" },
+  [MusicPlayer] = { "Music Player" },
+  [Screenshot] = { "Screenshot" }
 };
 
 // Call this script on mode change
