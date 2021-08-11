@@ -38,13 +38,14 @@ Key modes[MODE_SIZE][20] = {
   // dmenu scripts mode. Toggle once using [Super+p]
   [dmenuScripts] = {
     { 0, XK_b,          cmd("bookmarksurf") }, // Open dmenu bookmarks manager
-    { 0, XK_e,          cmd("dmenuunicode") }, // Open emoji keymode
-    { 0, XK_k,          cmd("dmenukill") }, // List applications to terminate
-    { 0, XK_o,          cmd("dmenumount") }, // Asks to mount drives, including USBs and a Android devices
-    { 0, XK_u,          cmd("dmenuumount") }, // Unmount any drive
-    { 0, XK_n,          cmd("dmenunotes") }, // Open markdown notes manager
-    { 0, XK_r,          cmd("dmenurecord") }, // Record using dmenu
+    { 0, XK_e,          cmd("dm-emoji") }, // Open emoji keymode
+    { 0, XK_k,          cmd("dm-kill") }, // List applications to terminate
+    { 0, XK_m,          cmd("dm-man") }, // Open a set of man pages
+    { 0, XK_n,          cmd("dm-notes") }, // Open markdown notes manager
+    { 0, XK_o,          cmd("dm-mount") }, // Asks to mount drives, including USBs and a Android devices
     { 0, XK_p,          cmd("passmenu --type -p 'ﳳ :: '") }, // Open password manager and autotyper
+    { 0, XK_r,          cmd("dm-record") }, // Record using dmenu
+    { 0, XK_u,          cmd("dm-umount") }, // Unmount any drive
   },
 
   // Music mode. Toggle using [Super+m] and hold super. Press any other key to go back to normal mode
@@ -97,7 +98,7 @@ Key keys[] = {
   { Super,                      XK_n,                         TERCMD(newsboat; sb-refresh sb-news) }, // RSS newsfeed
   /* { Super|ShiftMask,            XK_n,                         cmd("") }, */
 
-  { Super,                      XK_BackSpace,                 cmd("sysact") }, // Powermenu
+  { Super,                      XK_BackSpace,                 cmd("dm-power") }, // Powermenu
   /* { Super|ShiftMask,            XK_BackSpace,                 cmd("") }, */
 
   // Music player
@@ -124,7 +125,7 @@ Key keys[] = {
   { 0,                          XF86XK_MonBrightnessDown,     cmd("xbacklight -dec 2 ; sb-refresh sb-brightness") },
   { 0,                          XF86XK_MonBrightnessUp,       cmd("xbacklight -inc 2 ; sb-refresh sb-brightness") },
   { 0,                          XF86XK_MyComputer,            cmd(TERM " -d $(xcwd) -e lf-run") },
-  { 0,                          XF86XK_PowerOff,              cmd("sysact") },
+  { 0,                          XF86XK_PowerOff,              cmd("dm-power") },
   { 0,                          XF86XK_ScreenSaver,           cmd("slock & xset dpms force off; mpc pause; pauseallmpv") },
   { 0,                          XF86XK_Sleep,                 cmd("sudo -A zzz") },
   { 0,                          XF86XK_TaskPane,              TERCMD(gotop) },
@@ -166,7 +167,7 @@ Key keys[] = {
 
 ModeProperties mode_properties[MODE_SIZE] = {
   [Cheatsheets] = { "Cheatsheet" },
-  [dmenuScripts] = { "Dmenu" },
+  [dmenuScripts] = { "dmenu" },
   [MusicPlayer] = { "Music Player" },
   [Screenshot] = { "Screenshot" }
 };
