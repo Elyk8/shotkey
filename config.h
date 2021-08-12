@@ -31,29 +31,29 @@ Key modes[MODE_SIZE][20] = {
 
   // Cheatsheet mode. Toggle once using [Super+`]
   [Cheatsheets] = {
-    { 0, XK_1,          TERCHEAT("dwmbindings") }, // dwm window managementbindings
-    { 0, XK_2,          TERCHEAT("shotkey-list") }, // shotkey applications key binds list
-    { 0, XK_3,          TERCHEAT("stbindings") }, // st terminal key bindings
+    { 0,  XK_1,          TERCHEAT("dwmbindings") }, // dwm window managementbindings
+    { 0,  XK_2,          TERCHEAT("shotkey-list") }, // shotkey applications key binds list
+    { 0,  XK_3,          TERCHEAT("stbindings") }, // st terminal key bindings
   },
 
   [Layouts] = {
-    { 0,          XK_q,          DWMLAYOUT(0) }, // []= --> default tile layout
-    { ShiftMask,  XK_q,          DWMLAYOUT(1) }, // ||= --> columns (col) layout
-    { 0,          XK_w,          DWMLAYOUT(2) }, // ||| --> full columns
-    { ShiftMask,  XK_w,          DWMLAYOUT(3) }, // ==  --> full rows
-    { 0,          XK_e,          DWMLAYOUT(4) }, // ::: --> gappless grid
-    { ShiftMask,  XK_e,          DWMLAYOUT(5) }, // ==# --> bstackgrid
-    { 0,          XK_r,          DWMLAYOUT(6) }, // TTT --> bstack
-    { ShiftMask,  XK_r,          DWMLAYOUT(7) }, // === --> bstackhoriz
-    { 0,          XK_a,          DWMLAYOUT(8) }, // [M] --> monocle
-    { ShiftMask,  XK_a,          DWMLAYOUT(9) }, // [D] --> deck
-    { 0,          XK_s,          DWMLAYOUT(10) }, // |M| --> centeredmaster
-    { ShiftMask,  XK_s,          DWMLAYOUT(11) }, // -M- --> centeredmaster horiz
-    { 0,          XK_d,          DWMLAYOUT(12) }, // [T] --> tatami mats
-    { ShiftMask,  XK_d,          DWMLAYOUT(13) }, // >M> --> floating master
-    { 0,          XK_f,          DWMLAYOUT(14) }, // (@) --> fibonacci spiral
-    { ShiftMask,  XK_f,          DWMLAYOUT(15) }, // [\] --> fibonacci dwindle
-    { 0,          XK_o,          DWMLAYOUT(16) }, // ><> --> floating
+    { 0,  XK_q,          DWMLAYOUT(0) }, // []= --> default tile layout
+    { 0,  XK_y,          DWMLAYOUT(1) }, // ||= --> columns (col) layout
+    { 0,  XK_w,          DWMLAYOUT(2) }, // ||| --> full columns
+    { 0,  XK_u,          DWMLAYOUT(3) }, // ==  --> full rows
+    { 0,  XK_e,          DWMLAYOUT(4) }, // ::: --> gappless grid
+    { 0,  XK_i,          DWMLAYOUT(5) }, // ==# --> bstackgrid
+    { 0,  XK_r,          DWMLAYOUT(6) }, // TTT --> bstack
+    { 0,  XK_o,          DWMLAYOUT(7) }, // === --> bstackhoriz
+    { 0,  XK_a,          DWMLAYOUT(8) }, // [M] --> monocle
+    { 0,  XK_h,          DWMLAYOUT(9) }, // [D] --> deck
+    { 0,  XK_s,          DWMLAYOUT(10) }, // |M| --> centeredmaster
+    { 0,  XK_j,          DWMLAYOUT(11) }, // -M- --> centeredmaster horiz
+    { 0,  XK_d,          DWMLAYOUT(12) }, // [T] --> tatami mats
+    { 0,  XK_k,          DWMLAYOUT(13) }, // >M> --> floating master
+    { 0,  XK_f,          DWMLAYOUT(14) }, // (@) --> fibonacci spiral
+    { 0,  XK_l,          DWMLAYOUT(15) }, // [\] --> fibonacci dwindle
+    { 0,  XK_p,          DWMLAYOUT(16) }, // ><> --> floating
   },
   // dmenu scripts mode. Toggle once using [Super+p]
   [dmenuScripts] = {
