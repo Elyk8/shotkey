@@ -15,6 +15,7 @@ char shell[] = "/bin/sh";
 
 enum {
   Cheatsheets,
+  Applications,
   Layouts,
   dmenuScripts,
   MusicPlayer,
@@ -31,29 +32,37 @@ Key modes[MODE_SIZE][20] = {
 
   // Cheatsheet mode. Toggle once using [Super+`]
   [Cheatsheets] = {
-    { 0,  XK_1,          TERCHEAT("dwmbindings") }, // dwm window managementbindings
-    { 0,  XK_2,          TERCHEAT("shotkey-list") }, // shotkey applications key binds list
-    { 0,  XK_3,          TERCHEAT("stbindings") }, // st terminal key bindings
+    { 0,  XK_1,         TERCHEAT("dwmbindings") }, // dwm window managementbindings
+    { 0,  XK_2,         TERCHEAT("shotkey-list") }, // shotkey applications key binds list
+    { 0,  XK_3,         TERCHEAT("stbindings") }, // st terminal key bindings
+  },
+  [Applications] = {
+    { 0,  XK_w,         cmd("$BROWSER") },
+    { 0,  XK_e,         TERCMD(neomutt ; sb-refresh sb-mailbox) },
+    { 0,  XK_l,         cmd(TERM " -d $(xcwd) -e lf-run") }, // lf file manager with image previews
+    { 0,  XK_t,         TERCMD(gotop) }, // System usage terminal applications
+    { 0,  XK_n,         TERCMD(newsboat; sb-refresh sb-news) }, // RSS newsfeed
+    
   },
 
   [Layouts] = {
-    { 0,  XK_q,          DUSKLAYOUT(0) }, // []= --> default tile layout
-    { 0,  XK_y,          DUSKLAYOUT(1) }, // ||= --> columns (col) layout
-    { 0,  XK_w,          DUSKLAYOUT(2) }, // ||| --> full columns
-    { 0,  XK_u,          DUSKLAYOUT(3) }, // ==  --> full rows
-    { 0,  XK_e,          DUSKLAYOUT(4) }, // ::: --> gappless grid
-    { 0,  XK_i,          DUSKLAYOUT(5) }, // ==# --> bstackgrid
-    { 0,  XK_r,          DUSKLAYOUT(6) }, // TTT --> bstack
-    { 0,  XK_o,          DUSKLAYOUT(7) }, // === --> bstackhoriz
-    { 0,  XK_a,          DUSKLAYOUT(8) }, // [M] --> monocle
-    { 0,  XK_h,          DUSKLAYOUT(9) }, // [D] --> deck
-    { 0,  XK_s,          DUSKLAYOUT(10) }, // |M| --> centeredmaster
-    { 0,  XK_j,          DUSKLAYOUT(11) }, // -M- --> centeredmaster horiz
-    { 0,  XK_d,          DUSKLAYOUT(12) }, // [T] --> tatami mats
-    { 0,  XK_k,          DUSKLAYOUT(13) }, // >M> --> floating master
-    { 0,  XK_f,          DUSKLAYOUT(14) }, // (@) --> fibonacci spiral
-    { 0,  XK_l,          DUSKLAYOUT(15) }, // [\] --> fibonacci dwindle
-    { 0,  XK_p,          DUSKLAYOUT(16) }, // ><> --> floating
+    { 0,  XK_q,         DUSKLAYOUT(0) }, // []= --> default tile layout
+    { 0,  XK_a,         DUSKLAYOUT(1) }, // ||= --> columns (col) layout
+    { 0,  XK_w,         DUSKLAYOUT(2) }, // ||| --> full columns
+    { 0,  XK_s,         DUSKLAYOUT(3) }, // ==  --> full rows
+    { 0,  XK_e,         DUSKLAYOUT(4) }, // ::: --> gappless grid
+    { 0,  XK_d,         DUSKLAYOUT(5) }, // ==# --> bstackgrid
+    { 0,  XK_r,         DUSKLAYOUT(6) }, // TTT --> bstack
+    { 0,  XK_f,         DUSKLAYOUT(7) }, // === --> bstackhoriz
+    { 0,  XK_t,         DUSKLAYOUT(8) }, // [M] --> monocle
+    { 0,  XK_g,         DUSKLAYOUT(9) }, // [D] --> deck
+    { 0,  XK_y,         DUSKLAYOUT(10) }, // |M| --> centeredmaster
+    { 0,  XK_h,         DUSKLAYOUT(11) }, // -M- --> centeredmaster horiz
+    { 0,  XK_u,         DUSKLAYOUT(12) }, // [T] --> tatami mats
+    { 0,  XK_j,         DUSKLAYOUT(13) }, // >M> --> floating master
+    { 0,  XK_i,         DUSKLAYOUT(14) }, // (@) --> fibonacci spiral
+    { 0,  XK_k,         DUSKLAYOUT(15) }, // [\] --> fibonacci dwindle
+    { 0,  XK_p,         DUSKLAYOUT(16) }, // ><> --> floating
   },
   // dmenu scripts mode. Toggle once using [Super+p]
   [dmenuScripts] = {
@@ -104,20 +113,9 @@ Key keys[] = {
   { Super,                      XK_Return,                    cmd(TERM) }, // Spawn default terminal (st)
   { Super|ShiftMask,            XK_Return,                    cmd(TERM " -d $(xcwd)") }, // Spawn terminal in current working directory
 
-  { Super,                      XK_w,                         cmd("$BROWSER") }, // Default web browser (brave)
-  /* { Super|ShiftMask,            XK_w,                         cmd("") },  */
-
-  { Super,                      XK_e,                         TERCMD(neomutt ; sb-refresh sb-mailbox) }, // Neomutt email client
-  { Super|ShiftMask,            XK_e,                         TERCMD(abook) }, // Addressbook for neomutt
-
-  { Super,                      XK_r,                         cmd(TERM " -d $(xcwd) -e lf-run") }, // lf file manager with image previews
-  { Super|ShiftMask,            XK_r,                         TERCMD(gotop) }, // System usage terminal applications
-
-  { Super,                      XK_apostrophe,                cmd("dwmc togglescratch 1")}, // Toggle bc calculator scratchpad
+  /* { Super,                      XK_apostrophe,                cmd("")}, */
   /* { Super,                      XK_apostrophe,                cmd("")}, */
 
-  { Super,                      XK_n,                         TERCMD(newsboat; sb-refresh sb-news) }, // RSS newsfeed
-  /* { Super|ShiftMask,            XK_n,                         cmd("") }, */
 
   { Super,                      XK_BackSpace,                 cmd("dm-power") }, // Powermenu
   /* { Super|ShiftMask,            XK_BackSpace,                 cmd("") }, */
@@ -134,7 +132,7 @@ Key keys[] = {
   { Super,                      XK_p,                         mode(dmenuScripts, False) },
   /* { Super|ShiftMask,            XK_p,                         cmd("") }, */
 
-  { Super,                      XK_u,                         mode(Layouts, False) },
+  { Super,                      XK_semicolon,                         mode(Layouts, False) },
 
   { Super,                      XK_grave,                     mode(Cheatsheets, False) }, // Display cheatsheets
   /* { Super|ShiftMask,            XK_grave,                     cmd("") }, */
