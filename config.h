@@ -8,13 +8,14 @@ char shell[] = "/bin/sh";
 
 /* #define SCRIPT(str) cmd("~/scripts/" #str) */
 #define TERCMD(str) cmd(TERM " -e " #str)
-#define DWMLAYOUT(int) cmd("dwmc setlayout " #int)
+#define DWMLAYOUT(int) cmd("dwmc setlayoutex " #int)
 #define TERCHEAT(str) cmd(TERM " -n cheatsheet -g 120x30 -e " #str)
 #define WEBCAM cmd("mpv --no-cache --no-osc --no-input-default-bindings --profile=low-latency --untimed --vf=hflip --no-keepaspect-window --panscan=1 --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)")
 #define NOOP cmd("")
 
 enum {
   Cheatsheets,
+  Layouts,
   dmenuScripts,
   MusicPlayer,
   Screenshot,
@@ -35,6 +36,25 @@ Key modes[MODE_SIZE][20] = {
     { 0, XK_3,          TERCHEAT("stbindings") }, // st terminal key bindings
   },
 
+  [Layouts] = {
+    { 0,          XK_q,          DWMLAYOUT(0) }, // []= --> default tile layout
+    { ShiftMask,  XK_q,          DWMLAYOUT(1) }, // ||= --> columns (col) layout
+    { 0,          XK_w,          DWMLAYOUT(2) }, // ||| --> full columns
+    { ShiftMask,  XK_w,          DWMLAYOUT(3) }, // ==  --> full rows
+    { 0,          XK_e,          DWMLAYOUT(4) }, // ::: --> gappless grid
+    { ShiftMask,  XK_e,          DWMLAYOUT(5) }, // ==# --> bstackgrid
+    { 0,          XK_r,          DWMLAYOUT(6) }, // TTT --> bstack
+    { ShiftMask,  XK_r,          DWMLAYOUT(7) }, // === --> bstackhoriz
+    { 0,          XK_a,          DWMLAYOUT(8) }, // [M] --> monocle
+    { ShiftMask,  XK_a,          DWMLAYOUT(9) }, // [D] --> deck
+    { 0,          XK_s,          DWMLAYOUT(10) }, // |M| --> centeredmaster
+    { ShiftMask,  XK_s,          DWMLAYOUT(11) }, // -M- --> centeredmaster horiz
+    { 0,          XK_d,          DWMLAYOUT(12) }, // [T] --> tatami mats
+    { ShiftMask,  XK_d,          DWMLAYOUT(13) }, // >M> --> floating master
+    { 0,          XK_f,          DWMLAYOUT(14) }, // (@) --> fibonacci spiral
+    { ShiftMask,  XK_f,          DWMLAYOUT(15) }, // [\] --> fibonacci dwindle
+    { 0,          XK_o,          DWMLAYOUT(16) }, // ><> --> floating
+  },
   // dmenu scripts mode. Toggle once using [Super+p]
   [dmenuScripts] = {
     { 0, XK_b,          cmd("bookmarksurf") }, // Open dmenu bookmarks manager
@@ -114,6 +134,8 @@ Key keys[] = {
   { Super,                      XK_p,                         mode(dmenuScripts, False) },
   /* { Super|ShiftMask,            XK_p,                         cmd("") }, */
 
+  { Super,                      XK_u,                         mode(Layouts, False) },
+
   { Super,                      XK_grave,                     mode(Cheatsheets, False) }, // Display cheatsheets
   /* { Super|ShiftMask,            XK_grave,                     cmd("") }, */
 
@@ -167,6 +189,7 @@ Key keys[] = {
 };
 
 ModeProperties mode_properties[MODE_SIZE] = {
+  [Layouts] = { "Layouts" },
   [Cheatsheets] = { "Cheatsheet" },
   [dmenuScripts] = { "dmenu" },
   [MusicPlayer] = { "Music Player" },
