@@ -145,8 +145,8 @@ Key keys[] = {
   { 0,                          XF86XK_DOS,                   cmd(TERM) },
   { 0,                          XF86XK_Launch1,               cmd("xset dpms force off") },
   { 0,                          XF86XK_Mail,                  TERCMD(neomutt ; sb-refresh sb-mailbox) },
-  { 0,                          XF86XK_MonBrightnessDown,     cmd("xbacklight -dec 2 ; sb-refresh sb-brightness") },
-  { 0,                          XF86XK_MonBrightnessUp,       cmd("xbacklight -inc 2 ; sb-refresh sb-brightness") },
+  { 0,                          XF86XK_MonBrightnessDown,     cmd("xbacklight -dec 2 ; duskc run_command setstatus 3 \"$(sb-brightness)\"") },
+  { 0,                          XF86XK_MonBrightnessUp,       cmd("xbacklight -inc 2 ; duskc run_command setstatus 3 \"$(sb-brightness)\"") },
   { 0,                          XF86XK_MyComputer,            cmd(TERM " -d $(xcwd) -e lf-run") },
   { 0,                          XF86XK_PowerOff,              cmd("dm-power") },
   { 0,                          XF86XK_ScreenSaver,           cmd("slock & xset dpms force off; mpc pause; pauseallmpv") },
@@ -158,23 +158,23 @@ Key keys[] = {
   { 0,                          XF86XK_WWW,                   cmd("$BROWSER") },
 
   // Media controls
-  { 0,                          XF86XK_AudioForward,          cmd("mpc seek +10") },
-  { 0,                          XF86XK_AudioLowerVolume,      cmd("pamixer --allow-boost -d 3; sb-refresh sb-volume; canberra-gtk-play -i audio-volume-change") },
+  { 0,                          XF86XK_AudioForward,          cmd("mpc seek +10") }, 
+  { 0,                          XF86XK_AudioLowerVolume,      cmd("pamixer --allow-boost -d 3; duskc run_command setstatus 5 \"$(sb-volume)\" ; canberra-gtk-play -i audio-volume-change") },
   { 0,                          XF86XK_AudioMedia,            TERCMD(ncmpcpp) },
   { 0,                          XF86XK_AudioMicMute,          cmd("mic-toggle") },
-  { 0,                          XF86XK_AudioMute,             cmd("pamixer -t; sb-refresh sb-volume") },
+  { 0,                          XF86XK_AudioMute,             cmd("pamixer -t; ; duskc run_command setstatus 5 \"$(sb-volume)\"") },
   { 0,                          XF86XK_AudioNext,             cmd("mpc next") },
   { 0,                          XF86XK_AudioPause,            cmd("mpc pause") },
   { 0,                          XF86XK_AudioPlay,             cmd("mpc play") },
   { 0,                          XF86XK_AudioPrev,             cmd("mpc prev") },
-  { 0,                          XF86XK_AudioRaiseVolume,      cmd("pamixer -u; pamixer --allow-boost -i 3; sb-refresh sb-volume; canberra-gtk-play -i audio-volume-change") },
+  { 0,                          XF86XK_AudioRaiseVolume,      cmd("pamixer -u; pamixer --allow-boost -i 3; duskc run_command setstatus 5 \"$(sb-volume)\"; canberra-gtk-play -i audio-volume-change") },
   { 0,                          XF86XK_AudioRewind,           cmd("mpc seek -10") },
   { 0,                          XF86XK_AudioStop,             cmd("mpc stop") },
 
   // Function keys
   { Super,                      XK_F1,                        cmd("sxiv -r -q -t -o ~/Pics/wallpapers/*") },
   { Super,                      XK_F2,                        cmd("find ~/Pics/wallpapers/ -type f | shuf -n 1 | xargs xwallpaper --zoom") }, // Set random wallpaper
-  { Super,                      XK_F3,                        cmd("pavucontrol; sb-refresh sb-volume") }, // Volume mixer
+  { Super,                      XK_F3,                        cmd("pavucontrol; duskc run_command setstatus 5 \"$(sb-volume)\"") }, // Volume mixer
   { Super,                      XK_F4,                        cmd("toggle-conky") }, // Toggle conky, a computer specs and statistics display
   { Super,                      XK_F5,                        cmd("mw -Y && sb-refresh sb-mailbox") }, // Refresh mutt wizard email
   /* { Super,                      XK_F6,                        cmd("") },  */
