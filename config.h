@@ -80,7 +80,7 @@ Key modes[MODE_SIZE][20] = {
     { Super,            XK_j,             cmd("mpc volume -3") }, // Volume down -3
     { Super,            XK_k,             cmd("mpc volume +3") }, // Volume up +3
     { Super,            XK_l,             cmd("mpc next") }, // Next song
-    { Super,            XK_m,             cmd("dwmc togglescratch 2") }, // Open ncmpcpp
+    { Super,            XK_m,             cmd(TERM " -e ncmpcpp") }, // Open ncmpcpp
     { Super,            XK_r,             cmd("mpc repeat") }, // Toggle repeat mode
     { Super,            XK_s,             cmd("mpc pause ; pauseallmpv") }, // Stop
     { Super,            XK_space,         cmd("mpc toggle") }, // Pause/play
