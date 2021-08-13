@@ -14,10 +14,10 @@ char shell[] = "/bin/sh";
 #define NOOP cmd("")
 
 enum {
-  Cheatsheets,
   Applications,
   Layouts,
-  dmenuScripts,
+  Cheatsheets,
+  DmenuScripts,
   MusicPlayer,
   Screenshot,
 
@@ -36,6 +36,7 @@ Key modes[MODE_SIZE][20] = {
     { 0,  XK_2,         TERCHEAT("shotkey-list") }, // shotkey applications key binds list
     { 0,  XK_3,         TERCHEAT("stbindings") }, // st terminal key bindings
   },
+
   [Applications] = {
     { 0,  XK_w,         cmd("$BROWSER") },
     { 0,  XK_e,         TERCMD(neomutt ; sb-refresh sb-mailbox) },
@@ -65,7 +66,7 @@ Key modes[MODE_SIZE][20] = {
     { 0,  XK_p,         DUSKLAYOUT(16) }, // ><> --> floating
   },
   // dmenu scripts mode. Toggle once using [Super+p]
-  [dmenuScripts] = {
+  [DmenuScripts] = {
     { 0, XK_b,          cmd("bookmarksurf") }, // Open dmenu bookmarks manager
     { 0, XK_e,          cmd("dm-emoji") }, // Open emoji keymode
     { 0, XK_k,          cmd("dm-kill") }, // List applications to terminate
@@ -89,7 +90,7 @@ Key modes[MODE_SIZE][20] = {
     { Super,            XK_j,             cmd("mpc volume -3") }, // Volume down -3
     { Super,            XK_k,             cmd("mpc volume +3") }, // Volume up +3
     { Super,            XK_l,             cmd("mpc next") }, // Next song
-    { Super,            XK_m,             cmd("dwmc togglescratch 2") }, // Open ncmpcpp
+    { Super,            XK_m,             TERCMD(ncmpcpp) }, // Open ncmpcpp
     { Super,            XK_r,             cmd("mpc repeat") }, // Toggle repeat mode
     { Super,            XK_s,             cmd("mpc pause ; pauseallmpv") }, // Stop
     { Super,            XK_space,         cmd("mpc toggle") }, // Pause/play
@@ -113,10 +114,6 @@ Key keys[] = {
   { Super,                      XK_Return,                    cmd(TERM) }, // Spawn default terminal (st)
   { Super|ShiftMask,            XK_Return,                    cmd(TERM " -d $(xcwd)") }, // Spawn terminal in current working directory
 
-  /* { Super,                      XK_apostrophe,                cmd("")}, */
-  /* { Super,                      XK_apostrophe,                cmd("")}, */
-
-
   { Super,                      XK_BackSpace,                 cmd("dm-power") }, // Powermenu
   /* { Super|ShiftMask,            XK_BackSpace,                 cmd("") }, */
 
@@ -128,8 +125,9 @@ Key keys[] = {
   /* { Super|ShiftMask,            XK_c,                         cmd("") }, */
 
   { Super,                      XK_d,                         cmd("j4-dmenu-desktop --dmenu=\"dmenu -c -l 8 -bw 2\"") }, // Application launcher
+  { Super|ShiftMask,            XK_d,                         mode(Applications, False) }, // Application launcher
 
-  { Super,                      XK_p,                         mode(dmenuScripts, False) },
+  { Super,                      XK_p,                         mode(DmenuScripts, False) },
   /* { Super|ShiftMask,            XK_p,                         cmd("") }, */
 
   { Super,                      XK_semicolon,                         mode(Layouts, False) },
@@ -187,9 +185,10 @@ Key keys[] = {
 };
 
 ModeProperties mode_properties[MODE_SIZE] = {
+  [Applications] = { "Apps" },
   [Layouts] = { "Layouts" },
   [Cheatsheets] = { "Cheatsheet" },
-  [dmenuScripts] = { "dmenu" },
+  [DmenuScripts] = { "dmenu" },
   [MusicPlayer] = { "Music Player" },
   [Screenshot] = { "Screenshot" }
 };
