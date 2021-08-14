@@ -40,7 +40,7 @@ Key modes[MODE_SIZE][20] = {
   [Applications] = {
     { 0,  XK_w,         cmd("$BROWSER") },
     { 0,  XK_e,         TERCMD(neomutt; duskc run_command setstatus 7 "$(sb-mailbox)") },
-    { 0,  XK_l,         cmd(TERM " -d $(xcwd) -e lf-run") }, // lf file manager with image previews
+    { 0,  XK_l,         cmd(TERM " -d `xcwd` -e lf-run") }, // lf file manager with image previews
     { 0,  XK_t,         TERCMD(gotop) }, // System usage terminal applications
   },
 
@@ -110,28 +110,24 @@ Key keys[] = {
   /* Mod                        Key                           Command */
   // Applications
   { Super,                      XK_Return,                    cmd(TERM) }, // Spawn default terminal (st)
-  { Super|ShiftMask,            XK_Return,                    cmd(TERM " -d $(xcwd)") }, // Spawn terminal in current working directory
+  { Super|ShiftMask,            XK_Return,                    cmd(TERM " -d `xcwd`") }, // Spawn terminal in current working directory
 
   { Super,                      XK_BackSpace,                 cmd("dm-power") }, // Powermenu
-  /* { Super|ShiftMask,            XK_BackSpace,                 cmd("") }, */
 
   // Music player
   { Super,                      XK_m,                         mode(MusicPlayer, True) },
 
   // Menus
   { Super,                      XK_c,                         cmd("clipmenu") }, // dmenu clipboard history manager
-  /* { Super|ShiftMask,            XK_c,                         cmd("") }, */
 
   { Super,                      XK_d,                         cmd("j4-dmenu-desktop --dmenu=\"dmenu -c -l 8 -bw 2\"") }, // Application launcher
-  { Super|ShiftMask,            XK_d,                         mode(Applications, False) }, // Application launcher
+  { Super,                      XK_Tab,                       mode(Applications, False) }, // Application launcher
 
   { Super,                      XK_p,                         mode(DmenuScripts, False) },
-  /* { Super|ShiftMask,            XK_p,                         cmd("") }, */
 
   { Super,                      XK_semicolon,                 mode(Layouts, False) },
 
   { Super,                      XK_grave,                     mode(Cheatsheets, False) }, // Display cheatsheets
-  /* { Super|ShiftMask,            XK_grave,                     cmd("") }, */
 
   // System
   /* { 0,                          XF86XK_Battery,               cmd("") }, */
@@ -176,7 +172,7 @@ Key keys[] = {
   /* { Super,                      XK_F8,                        cmd("") }, */
   /* { Super,                      XK_F9,                        cmd("") }, */
   /* { Super,                      XK_F10,                       cmd("") }, */
-  { Super,                      XK_F11,                       cmd("remaps && notify-send \\\"⌨️ Keyboard remapping...\\\" \\\"Re-running keyboard defaults for any newly plugged-in keyboards.\\\"") },
+  { Super,                      XK_F11,                       cmd("remaps; notify-send \"⌨️ Keyboard remapping...\" \"Re-running keyboard defaults for any newly plugged-in keyboards.\"") },
   { Super,                      XK_F12,                       WEBCAM }, // Display output of webcam using mpv
   // Screenshot
   { 0,                          XK_Print,                     mode(Screenshot, False) }, // Toggle flameshot mode
