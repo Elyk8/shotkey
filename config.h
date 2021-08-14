@@ -6,7 +6,6 @@ char shell[] = "/bin/sh";
 #define Super Mod4Mask
 #define TERM "st"
 
-/* #define SCRIPT(str) cmd("~/scripts/" #str) */
 #define TERCMD(str) cmd(TERM " -e " #str)
 #define DUSKLAYOUT(int) cmd("duskc run_command setlayoutex " #int)
 #define TERCHEAT(str) cmd(TERM " -n cheatsheet -g 120x30 -e " #str)
@@ -111,23 +110,18 @@ Key keys[] = {
   // Applications
   { Super,                      XK_Return,                    cmd(TERM) }, // Spawn default terminal (st)
   { Super|ShiftMask,            XK_Return,                    cmd(TERM " -d `xcwd`") }, // Spawn terminal in current working directory
-
-  { Super,                      XK_BackSpace,                 cmd("dm-power") }, // Powermenu
+  { Super,                      XK_Tab,                       mode(Applications, False) }, // Application launcher
 
   // Music player
   { Super,                      XK_m,                         mode(MusicPlayer, True) },
 
   // Menus
   { Super,                      XK_c,                         cmd("clipmenu") }, // dmenu clipboard history manager
-
   { Super,                      XK_d,                         cmd("j4-dmenu-desktop --dmenu=\"dmenu -c -l 8 -bw 2\"") }, // Application launcher
-  { Super,                      XK_Tab,                       mode(Applications, False) }, // Application launcher
-
   { Super,                      XK_p,                         mode(DmenuScripts, False) },
-
   { Super,                      XK_semicolon,                 mode(Layouts, False) },
-
   { Super,                      XK_grave,                     mode(Cheatsheets, False) }, // Display cheatsheets
+  { Super,                      XK_BackSpace,                 cmd("dm-power") }, // Powermenu
 
   // System
   /* { 0,                          XF86XK_Battery,               cmd("") }, */
