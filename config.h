@@ -32,18 +32,16 @@ Key modes[MODE_SIZE][20] = {
 
   // Cheatsheet mode. Toggle once using [Super+`]
   [Cheatsheets] = {
-    { 0,  XK_1,         TERCHEAT("dwmbindings") }, // dwm window managementbindings
+    { 0,  XK_1,         TERCHEAT("duskbindings") }, // dwm window managementbindings
     { 0,  XK_2,         TERCHEAT("shotkey-list") }, // shotkey applications key binds list
     { 0,  XK_3,         TERCHEAT("stbindings") }, // st terminal key bindings
   },
 
   [Applications] = {
     { 0,  XK_w,         cmd("$BROWSER") },
-    { 0,  XK_e,         TERCMD(neomutt ; sb-refresh sb-mailbox) },
+    { 0,  XK_e,         TERCMD(neomutt; duskc run_command setstatus 7 "$(sb-mailbox)") },
     { 0,  XK_l,         cmd(TERM " -d $(xcwd) -e lf-run") }, // lf file manager with image previews
     { 0,  XK_t,         TERCMD(gotop) }, // System usage terminal applications
-    { 0,  XK_n,         TERCMD(newsboat; sb-refresh sb-news) }, // RSS newsfeed
-    
   },
 
   [Layouts] = {
@@ -65,6 +63,7 @@ Key modes[MODE_SIZE][20] = {
     { 0,  XK_k,         DUSKLAYOUT(15) }, // [\] --> fibonacci dwindle
     { 0,  XK_p,         DUSKLAYOUT(16) }, // ><> --> floating
   },
+
   // dmenu scripts mode. Toggle once using [Super+p]
   [DmenuScripts] = {
     { 0, XK_b,          cmd("bookmarksurf") }, // Open dmenu bookmarks manager
@@ -76,7 +75,6 @@ Key modes[MODE_SIZE][20] = {
     { 0, XK_p,          cmd("passmenu --type -p 'ﳳ :: '") }, // Open password manager and autotyper
     { 0, XK_r,          cmd("dm-record") }, // Record using dmenu
     { 0, XK_u,          cmd("dm-umount") }, // Unmount any drive
-    { 0, XK_y,          cmd("dm-yt") }, // Youtube client dmenu
   },
 
   // Music mode. Toggle using [Super+m] and hold super. Press any other key to go back to normal mode
@@ -90,7 +88,7 @@ Key modes[MODE_SIZE][20] = {
     { Super,            XK_j,             cmd("mpc volume -3") }, // Volume down -3
     { Super,            XK_k,             cmd("mpc volume +3") }, // Volume up +3
     { Super,            XK_l,             cmd("mpc next") }, // Next song
-    { Super,            XK_m,             TERCMD(ncmpcpp) }, // Open ncmpcpp
+    { Super,            XK_m,             cmd(TERM " -c ncmpcpp -g 125x41 -e ncmpcpp") }, // Open ncmpcpp
     { Super,            XK_r,             cmd("mpc repeat") }, // Toggle repeat mode
     { Super,            XK_s,             cmd("mpc pause ; pauseallmpv") }, // Stop
     { Super,            XK_space,         cmd("mpc toggle") }, // Pause/play
@@ -130,7 +128,7 @@ Key keys[] = {
   { Super,                      XK_p,                         mode(DmenuScripts, False) },
   /* { Super|ShiftMask,            XK_p,                         cmd("") }, */
 
-  { Super,                      XK_semicolon,                         mode(Layouts, False) },
+  { Super,                      XK_semicolon,                 mode(Layouts, False) },
 
   { Super,                      XK_grave,                     mode(Cheatsheets, False) }, // Display cheatsheets
   /* { Super|ShiftMask,            XK_grave,                     cmd("") }, */
@@ -140,7 +138,7 @@ Key keys[] = {
   { 0,                          XF86XK_Calculator,            TERCMD(bc -l) },
   { 0,                          XF86XK_DOS,                   cmd(TERM) },
   { 0,                          XF86XK_Launch1,               cmd("xset dpms force off") },
-  { 0,                          XF86XK_Mail,                  TERCMD(neomutt ; sb-refresh sb-mailbox) },
+  { 0,                          XF86XK_Mail,                  TERCMD(neomutt ; duskc run_command setstatus 7 "$(sb-mailbox)") },
   { 0,                          XF86XK_MonBrightnessDown,     cmd("xbacklight -dec 2 ; duskc run_command setstatus 3 \"$(sb-brightness)\"") },
   { 0,                          XF86XK_MonBrightnessUp,       cmd("xbacklight -inc 2 ; duskc run_command setstatus 3 \"$(sb-brightness)\"") },
   { 0,                          XF86XK_MyComputer,            cmd(TERM " -d $(xcwd) -e lf-run") },
@@ -158,7 +156,7 @@ Key keys[] = {
   { 0,                          XF86XK_AudioLowerVolume,      cmd("pamixer --allow-boost -d 3; duskc run_command setstatus 5 \"$(sb-volume)\" ; canberra-gtk-play -i audio-volume-change") },
   { 0,                          XF86XK_AudioMedia,            TERCMD(ncmpcpp) },
   { 0,                          XF86XK_AudioMicMute,          cmd("mic-toggle") },
-  { 0,                          XF86XK_AudioMute,             cmd("pamixer -t; ; duskc run_command setstatus 5 \"$(sb-volume)\"") },
+  { 0,                          XF86XK_AudioMute,             cmd("pamixer -t; duskc run_command setstatus 5 \"$(sb-volume)\"") },
   { 0,                          XF86XK_AudioNext,             cmd("mpc next") },
   { 0,                          XF86XK_AudioPause,            cmd("mpc pause") },
   { 0,                          XF86XK_AudioPlay,             cmd("mpc play") },
@@ -169,10 +167,10 @@ Key keys[] = {
 
   // Function keys
   { Super,                      XK_F1,                        cmd("sxiv -r -q -t -o ~/Pics/wallpapers/*") },
-  { Super,                      XK_F2,                        cmd("find ~/Pics/wallpapers/ -type f | shuf -n 1 | xargs xwallpaper --zoom") }, // Set random wallpaper
+  { Super,                      XK_F2,                        cmd("feh --randomize --bg-fill ~/Pics/wallpapers/*") }, // Set random wallpaper
   { Super,                      XK_F3,                        cmd("pavucontrol; duskc run_command setstatus 5 \"$(sb-volume)\"") }, // Volume mixer
   { Super,                      XK_F4,                        cmd("toggle-conky") }, // Toggle conky, a computer specs and statistics display
-  { Super,                      XK_F5,                        cmd("mw -Y && sb-refresh sb-mailbox") }, // Refresh mutt wizard email
+  { Super,                      XK_F5,                        cmd("mw -Y && duskc run_command setstatus $BLOCK_STATUS \"$(sb-mailbox)\"") }, // Refresh mutt wizard email
   /* { Super,                      XK_F6,                        cmd("") },  */
   /* { Super,                      XK_F7,                        cmd("") },  */
   /* { Super,                      XK_F8,                        cmd("") }, */
