@@ -38,40 +38,42 @@ Key modes[MODE_SIZE][20] = {
 
   [Applications] = {
     { 0,  XK_w,         cmd("$BROWSER") },
+    { 0,  XK_d,         cmd("discord --no-sandbox") },
     { 0,  XK_e,         TERCMD(neomutt; duskc run_command setstatus 7 "$(sb-mailbox)") },
     { 0,  XK_l,         cmd(TERM " -d `xcwd` -e lf-run") }, // lf file manager with image previews
+    { 0,  XK_n,         TERCMD(newsboat) },
     { 0,  XK_t,         TERCMD(gotop) }, // System usage terminal applications
   },
 
   [Layouts] = {
-    { 0,  XK_q,         DUSKLAYOUT(0) }, // []= --> default tile layout
-    { 0,  XK_a,         DUSKLAYOUT(1) }, // ||= --> columns (col) layout
-    { 0,  XK_w,         DUSKLAYOUT(2) }, // ||| --> full columns
-    { 0,  XK_s,         DUSKLAYOUT(3) }, // ==  --> full rows
-    { 0,  XK_e,         DUSKLAYOUT(4) }, // ::: --> gappless grid
-    { 0,  XK_d,         DUSKLAYOUT(5) }, // ==# --> bstackgrid
-    { 0,  XK_r,         DUSKLAYOUT(6) }, // TTT --> bstack
-    { 0,  XK_f,         DUSKLAYOUT(7) }, // === --> bstackhoriz
-    { 0,  XK_t,         DUSKLAYOUT(8) }, // [M] --> monocle
-    { 0,  XK_g,         DUSKLAYOUT(9) }, // [D] --> deck
-    { 0,  XK_y,         DUSKLAYOUT(10) }, // |M| --> centeredmaster
-    { 0,  XK_h,         DUSKLAYOUT(11) }, // -M- --> centeredmaster horiz
-    { 0,  XK_u,         DUSKLAYOUT(12) }, // [T] --> tatami mats
-    { 0,  XK_j,         DUSKLAYOUT(13) }, // >M> --> floating master
-    { 0,  XK_i,         DUSKLAYOUT(14) }, // (@) --> fibonacci spiral
-    { 0,  XK_k,         DUSKLAYOUT(15) }, // [\] --> fibonacci dwindle
-    { 0,  XK_p,         DUSKLAYOUT(16) }, // ><> --> floating
+    { 0,  XK_q,         DUSKLAYOUT(0) }, // []=
+    { 0,  XK_a,         DUSKLAYOUT(1) }, // ||=
+    { 0,  XK_w,         DUSKLAYOUT(2) }, // |||
+    { 0,  XK_s,         DUSKLAYOUT(3) }, // ==
+    { 0,  XK_e,         DUSKLAYOUT(4) }, // :::
+    { 0,  XK_d,         DUSKLAYOUT(5) }, // ==#
+    { 0,  XK_r,         DUSKLAYOUT(6) }, // TTT
+    { 0,  XK_f,         DUSKLAYOUT(7) }, // ===
+    { 0,  XK_t,         DUSKLAYOUT(8) }, // [M]
+    { 0,  XK_g,         DUSKLAYOUT(9) }, // [D]
+    { 0,  XK_y,         DUSKLAYOUT(10) }, // |M|
+    { 0,  XK_h,         DUSKLAYOUT(11) }, // -M-
+    { 0,  XK_u,         DUSKLAYOUT(12) }, // [T]
+    { 0,  XK_j,         DUSKLAYOUT(13) }, // >M>
+    { 0,  XK_i,         DUSKLAYOUT(14) }, // (@)
+    { 0,  XK_k,         DUSKLAYOUT(15) }, // [\]
+    { 0,  XK_p,         DUSKLAYOUT(16) }, // ><>
   },
 
   // dmenu scripts mode. Toggle once using [Super+p]
   [DmenuScripts] = {
-    { 0, XK_b,          cmd("bookmarksurf") }, // Open dmenu bookmarks manager
-    { 0, XK_e,          cmd("dm-emoji") }, // Open emoji keymode
-    { 0, XK_k,          cmd("dm-kill") }, // List applications to terminate
-    { 0, XK_m,          cmd("dm-man") }, // Open a set of man pages
-    { 0, XK_n,          cmd("dm-notes") }, // Open markdown notes manager
-    { 0, XK_o,          cmd("dm-mount") }, // Asks to mount drives, including USBs and a Android devices
-    { 0, XK_p,          cmd("passmenu --type -p 'ﳳ :: '") }, // Open password manager and autotyper
+    { 0, XK_b,          cmd("bookmarksurf") }, // Dmenu bookmarks manager
+    { 0, XK_e,          cmd("dm-emoji") }, // Emoji keyboard
+    { 0, XK_k,          cmd("dm-kill") }, // Terminate applications
+    { 0, XK_m,          cmd("dm-man") }, // Man pages list
+    { 0, XK_n,          cmd("dm-notes") }, // Markdown notes manager
+    { 0, XK_o,          cmd("dm-mount") }, // Mount drives, including USBs and a Android devices
+    { 0, XK_p,          cmd("passmenu --type -p 'ﳳ :: '") }, // Password manager and autotyper
     { 0, XK_r,          cmd("dm-record") }, // Record using dmenu
     { 0, XK_u,          cmd("dm-umount") }, // Unmount any drive
   },
@@ -111,11 +113,8 @@ Key keys[] = {
   { Super,                      XK_Return,                    cmd(TERM) }, // Spawn default terminal (st)
   { Super|ShiftMask,            XK_Return,                    cmd(TERM " -d `xcwd`") }, // Spawn terminal in current working directory
   { Super,                      XK_Tab,                       mode(Applications, False) }, // Application launcher
-
-  // Music player
-  { Super,                      XK_m,                         mode(MusicPlayer, True) },
-
-  // Menus
+  { Super,                      XK_m,                         mode(MusicPlayer, True) }, // Music player
+  { Super|ShiftMask,            XK_m,                         cmd("mic-toggle") },
   { Super,                      XK_c,                         cmd("clipmenu") }, // dmenu clipboard history manager
   { Super,                      XK_d,                         cmd("j4-dmenu-desktop --dmenu=\"dmenu -c -l 8 -bw 2\"") }, // Application launcher
   { Super,                      XK_p,                         mode(DmenuScripts, False) },
