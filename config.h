@@ -14,11 +14,11 @@ char shell[] = "/bin/sh";
 
 enum {
 	Applications,
-	Layouts,
 	Cheatsheets,
-	DmenuScripts,
+	Prompts,
 	MusicPlayer,
 	Screenshot,
+	System,
 
 	// Declare modes above this
 	MODE_SIZE,
@@ -41,32 +41,13 @@ Key modes[MODE_SIZE][20] = {
 		{ 0,  XK_w,         cmd("$BROWSER") },
 		{ 0,  XK_d,         cmd("discord --no-sandbox") },
 		{ 0,  XK_e,         TERCMD(neomutt; duskc run_command setstatus 7 "$(sb-mailbox)") },
-		{ 0,  XK_l,         cmd(TERM " -d `xcwd` -e lf") }, // lf file manager with image previews
+		{ 0,  XK_l,         cmd(TERM " -e lf-run") }, // lf file manager with image previews
 		{ 0,  XK_n,         TERCMD(newsboat) },
 		{ 0,  XK_t,         TERCMD(gotop) }, // System usage terminal applications
 	},
 
-	// Layouts shortcuts. Toggle using [Super+;]
-	[Layouts] = {
-		{ 0,  XK_q,         DUSKLAYOUT(0) }, // []=
-		{ 0,  XK_a,         DUSKLAYOUT(1) }, // ||=
-		{ 0,  XK_w,         DUSKLAYOUT(2) }, // :::
-		{ 0,  XK_s,         DUSKLAYOUT(3) }, // ==#
-		{ 0,  XK_e,         DUSKLAYOUT(4) }, // TTT
-		{ 0,  XK_d,         DUSKLAYOUT(5) }, // ===
-		{ 0,  XK_r,         DUSKLAYOUT(6) }, // [M]
-		{ 0,  XK_f,         DUSKLAYOUT(7) }, // [D]
-		{ 0,  XK_t,         DUSKLAYOUT(8) }, // |M|
-		{ 0,  XK_g,         DUSKLAYOUT(9) }, // -M-
-		{ 0,  XK_y,         DUSKLAYOUT(10) }, // [T]
-		{ 0,  XK_h,         DUSKLAYOUT(11) }, // >M>
-		{ 0,  XK_u,         DUSKLAYOUT(12) }, // (@)
-		{ 0,  XK_j,         DUSKLAYOUT(13) }, // [\]
-		{ 0,  XK_i,         DUSKLAYOUT(14) }, // ><>
-	},
-
 	// dmenu scripts mode. Toggle once using [Super+p]
-	[DmenuScripts] = {
+	[Prompts] = {
 		{ 0, XK_b,          cmd("bookmarksurf") }, // Dmenu bookmarks manager
 		{ 0, XK_e,          cmd("dm-emoji") }, // Emoji keyboard
 		{ 0, XK_k,          cmd("dm-kill") }, // Terminate applications
@@ -75,7 +56,9 @@ Key modes[MODE_SIZE][20] = {
 		{ 0, XK_o,          cmd("dm-mount") }, // Mount drives, including USBs and a Android devices
 		{ 0, XK_p,          cmd("passmenu --type -p 'ﳳ :: '") }, // Password manager and autotyper
 		{ 0, XK_r,          cmd("dm-record") }, // Record using dmenu
+		{ 0, XK_s,          cmd("dm-et") }, // Dictionary
 		{ 0, XK_u,          cmd("dm-umount") }, // Unmount any drive
+		{ 0, XK_w,          cmd(TERM " -g 144x41 -n \"weatherdisplay\" -e less $HOME/.cache/weatherreport") }, // Display the weather forecast
 	},
 
 	// Music mode. Toggle using [Super+m] and hold super. Press any other key to go back to normal mode
@@ -102,6 +85,16 @@ Key modes[MODE_SIZE][20] = {
 		{ 0, XK_g,          cmd("flameshot gui -p ~/Pics/screenshots") },
 		{ 0, XK_f,          cmd("flameshot full -p ~/Pics/screenshots") },
 	},
+
+	[System] = {
+		{ 0, XK_a,          cmd("sxiv -r -q -t -o ~/Pics/wallpapers/*") },
+		{ 0, XK_c,          cmd("toggle-conky") },
+		{ 0, XK_e,          cmd("mw -Y && duskc run_command setstatus $BLOCK_STATUS \"$(sb-mailbox)\"") },
+		{ 0, XK_m,          cmd("remaps; notify-send \"⌨️ Keyboard remapping...\" \"Re-running keyboard defaults for any newly plugged-in keyboards.\"") },
+		{ 0, XK_r,          cmd("feh --randomize --bg-fill ~/Pics/wallpapers/*") },
+		{ 0, XK_v,          cmd("pavucontrol; duskc run_command setstatus 5 \"$(sb-volume)\"") },
+		{ 0, XK_w,          WEBCAM },
+	},
 };
 
 Key keys[] = {
@@ -110,16 +103,15 @@ Key keys[] = {
 
 	/* Mod                        Key                           Command */
 	// Applications
-	{ Super,                      XK_Return,                    cmd(TERM) }, // Spawn default terminal (st)
-	{ Super|ShiftMask,            XK_Return,                    cmd(TERM " -d `xcwd`") }, // Spawn terminal in current working directory
+	{ Super,                      XK_t,                         cmd(TERM " -d `xcwd`") }, // Spawn default terminal (st)
 	{ Super,                      XK_o,                         mode(Applications, False) }, // Application launcher
+	{ Super,                      XK_grave,                     mode(System, False) }, // Application launcher
 	{ Super,                      XK_m,                         mode(MusicPlayer, True) }, // Music player
 	{ Super|ShiftMask,            XK_m,                         cmd("mic-toggle") },
 	{ Super,                      XK_c,                         cmd("clipmenu") }, // dmenu clipboard history manager
 	{ Super,                      XK_d,                         cmd("j4-dmenu-desktop --dmenu=\"dmenu -c -l 8 -bw 2\"") }, // Application launcher
-	{ Super,                      XK_p,                         mode(DmenuScripts, False) },
-	{ Super,                      XK_semicolon,                 mode(Layouts, False) },
-	{ Super,                      XK_grave,                     mode(Cheatsheets, False) }, // Display cheatsheets
+	{ Super,                      XK_p,                         mode(Prompts, False) },
+	{ Super,                      XK_slash,              mode(Cheatsheets, False) }, // Display cheatsheets
 	{ Super,                      XK_BackSpace,                 cmd("dm-power") }, // Powermenu
 
 	// System
@@ -130,7 +122,7 @@ Key keys[] = {
 	{ 0,                          XF86XK_Mail,                  TERCMD(neomutt ; duskc run_command setstatus 7 "$(sb-mailbox)") },
 	{ 0,                          XF86XK_MonBrightnessDown,     cmd("xbacklight -dec 2 ; duskc run_command setstatus 3 \"$(sb-brightness)\"") },
 	{ 0,                          XF86XK_MonBrightnessUp,       cmd("xbacklight -inc 2 ; duskc run_command setstatus 3 \"$(sb-brightness)\"") },
-	{ 0,                          XF86XK_MyComputer,            cmd(TERM " -d $(xcwd) -e lf") },
+	{ 0,                          XF86XK_MyComputer,            cmd(TERM " -e lf-run") },
 	{ 0,                          XF86XK_PowerOff,              cmd("dm-power") },
 	{ 0,                          XF86XK_ScreenSaver,           cmd("slock & xset dpms force off; mpc pause; pauseallmpv") },
 	{ 0,                          XF86XK_Sleep,                 cmd("sudo -A zzz") },
@@ -154,30 +146,17 @@ Key keys[] = {
 	{ 0,                          XF86XK_AudioRewind,           cmd("mpc seek -10") },
 	{ 0,                          XF86XK_AudioStop,             cmd("mpc stop") },
 
-	// Function keys
-	{ Super,                      XK_F1,                        cmd("sxiv -r -q -t -o ~/Pics/wallpapers/*") },
-	{ Super,                      XK_F2,                        cmd("feh --randomize --bg-fill ~/Pics/wallpapers/*") }, // Set random wallpaper
-	{ Super,                      XK_F3,                        cmd("pavucontrol; duskc run_command setstatus 5 \"$(sb-volume)\"") }, // Volume mixer
-	{ Super,                      XK_F4,                        cmd("toggle-conky") }, // Toggle conky, a computer specs and statistics display
-	{ Super,                      XK_F5,                        cmd("mw -Y && duskc run_command setstatus $BLOCK_STATUS \"$(sb-mailbox)\"") }, // Refresh mutt wizard email
-	/* { Super,                      XK_F6,                        cmd("") },  */
-	/* { Super,                      XK_F7,                        cmd("") },  */
-	/* { Super,                      XK_F8,                        cmd("") }, */
-	/* { Super,                      XK_F9,                        cmd("") }, */
-	/* { Super,                      XK_F10,                       cmd("") }, */
-	{ Super,                      XK_F11,                       cmd("remaps; notify-send \"⌨️ Keyboard remapping...\" \"Re-running keyboard defaults for any newly plugged-in keyboards.\"") },
-	{ Super,                      XK_F12,                       WEBCAM }, // Display output of webcam using mpv
 	// Screenshot
 	{ 0,                          XK_Print,                     mode(Screenshot, False) }, // Toggle flameshot mode
 };
 
 ModeProperties mode_properties[MODE_SIZE] = {
 	[Applications] = { "Apps" },
-	[Layouts] = { "Layouts" },
 	[Cheatsheets] = { "Cheatsheet" },
-	[DmenuScripts] = { "dmenu" },
+	[Prompts] = { "Prompts" },
 	[MusicPlayer] = { "Music Player" },
-	[Screenshot] = { "Screenshot" }
+	[Screenshot] = { "Screenshot" },
+	[System] = { "System" },
 };
 
 // Call this script on mode change
