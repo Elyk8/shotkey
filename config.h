@@ -7,7 +7,6 @@ char shell[] = "/bin/sh";
 #define TERM "st"
 
 #define TERCMD(str) cmd(TERM " -e " #str)
-#define DUSKLAYOUT(int) cmd("duskc run_command setlayoutex " #int)
 #define TERCHEAT(str) cmd(TERM " -n cheatsheet -g 120x30 -e " #str)
 #define WEBCAM cmd("mpv --no-cache --no-osc --no-input-default-bindings --profile=low-latency --untimed --vf=hflip --no-keepaspect-window --panscan=1 --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)")
 #define NOOP cmd("")
@@ -56,28 +55,27 @@ Key modes[MODE_SIZE][20] = {
 		{ 0, XK_o,          cmd("dm-mount") }, // Mount drives, including USBs and a Android devices
 		{ 0, XK_p,          cmd("passmenu --type -p 'ﳳ :: '") }, // Password manager and autotyper
 		{ 0, XK_r,          cmd("dm-record") }, // Record using dmenu
-		{ 0, XK_s,          cmd("dm-et") }, // Dictionary
 		{ 0, XK_u,          cmd("dm-umount") }, // Unmount any drive
-		{ 0, XK_w,          cmd(TERM " -g 144x41 -n \"weatherdisplay\" -e less $HOME/.cache/weatherreport") }, // Display the weather forecast
+		{ 0, XK_w,          cmd(TERM " -g 135x35 -n \"weatherdisplay\" -e weatherforecast") }, // Display the weather forecast
 	},
 
 	// Music mode. Toggle using [Super+m] and hold super. Press any other key to go back to normal mode
 	[MusicPlayer] = {
-		{ Super,            XK_0,             cmd("mpc seek 0%") }, // Restart song
-		{ Super,            XK_bracketleft,   cmd("mpc seek -60") }, // Backward 60 secs
-		{ Super,            XK_bracketright,  cmd("mpc seek +60") }, // Forward 60 secs
-		{ Super,            XK_comma,         cmd("mpc seek -10") }, // Backward 10 secs
-		{ Super,            XK_period,        cmd("mpc seek +10") }, // Forward 10 secs
-		{ Super,            XK_h,             cmd("mpc prev") }, // Previous song
-		{ Super,            XK_j,             cmd("mpc volume -3") }, // Volume down -3
-		{ Super,            XK_k,             cmd("mpc volume +3") }, // Volume up +3
-		{ Super,            XK_l,             cmd("mpc next") }, // Next song
-		{ Super,            XK_m,             cmd(TERM " -e ncmpcpp") }, // Open ncmpcpp
-		{ Super,            XK_r,             cmd("mpc repeat") }, // Toggle repeat mode
-		{ Super,            XK_s,             cmd("mpc pause ; pauseallmpv") }, // Stop
-		{ Super,            XK_space,         cmd("mpc toggle") }, // Pause/play
-		{ Super|ShiftMask,  XK_k,             cmd("mpc volume +12") }, // Volume up +12
-		{ Super|ShiftMask,  XK_j,             cmd("mpc volume -12") }, // Volume down -12
+		{ 0,                XK_0,             cmd("mpc seek 0%") }, // Restart song
+		{ 0,                XK_bracketleft,   cmd("mpc seek -60") }, // Backward 60 secs
+		{ 0,                XK_bracketright,  cmd("mpc seek +60") }, // Forward 60 secs
+		{ 0,                XK_comma,         cmd("mpc seek -10") }, // Backward 10 secs
+		{ 0,                XK_period,        cmd("mpc seek +10") }, // Forward 10 secs
+		{ 0,                XK_h,             cmd("mpc prev") }, // Previous song
+		{ 0,                XK_j,             cmd("mpc volume -3") }, // Volume down -3
+		{ 0,                XK_k,             cmd("mpc volume +3") }, // Volume up +3
+		{ 0,                XK_l,             cmd("mpc next") }, // Next song
+		{ 0,                XK_m,             cmd(TERM " -e ncmpcpp") }, // Open ncmpcpp
+		{ 0,                XK_r,             cmd("mpc repeat") }, // Toggle repeat mode
+		{ 0,                XK_s,             cmd("mpc pause ; pauseallmpv") }, // Stop
+		{ 0,                XK_space,         cmd("mpc toggle") }, // Pause/play
+		{ ShiftMask,        XK_k,             cmd("mpc volume +12") }, // Volume up +12
+		{ ShiftMask,        XK_j,             cmd("mpc volume -12") }, // Volume down -12
 	},
 
 	// Screenshot mode, using flameshot. Use [PrintScreen] to toggle once.
@@ -86,6 +84,7 @@ Key modes[MODE_SIZE][20] = {
 		{ 0, XK_f,          cmd("flameshot full -p ~/Pics/screenshots") },
 	},
 
+	// System shortcuts mode.
 	[System] = {
 		{ 0, XK_a,          cmd("sxiv -r -q -t -o ~/Pics/wallpapers/*") },
 		{ 0, XK_c,          cmd("toggle-conky") },
@@ -119,7 +118,7 @@ Key keys[] = {
 	{ 0,                          XF86XK_Calculator,            TERCMD(bc -l) },
 	{ 0,                          XF86XK_DOS,                   cmd(TERM) },
 	{ 0,                          XF86XK_Launch1,               cmd("xset dpms force off") },
-	{ 0,                          XF86XK_Mail,                  TERCMD(neomutt ; duskc run_command setstatus 7 "$(sb-mailbox)") },
+	{ 0,                          XF86XK_Mail,                  TERCMD(neomutt; duskc run_command setstatus 7 "$(sb-mailbox)") },
 	{ 0,                          XF86XK_MonBrightnessDown,     cmd("xbacklight -dec 2 ; duskc run_command setstatus 3 \"$(sb-brightness)\"") },
 	{ 0,                          XF86XK_MonBrightnessUp,       cmd("xbacklight -inc 2 ; duskc run_command setstatus 3 \"$(sb-brightness)\"") },
 	{ 0,                          XF86XK_MyComputer,            cmd(TERM " -e lf-run") },
@@ -133,7 +132,7 @@ Key keys[] = {
 	{ 0,                          XF86XK_WWW,                   cmd("$BROWSER") },
 
 	// Media controls
-	{ 0,                          XF86XK_AudioForward,          cmd("mpc seek +10") }, 
+	{ 0,                          XF86XK_AudioForward,          cmd("mpc seek +10") },
 	{ 0,                          XF86XK_AudioLowerVolume,      cmd("pamixer --allow-boost -d 3; duskc run_command setstatus 5 \"$(sb-volume)\" ; canberra-gtk-play -i audio-volume-change") },
 	{ 0,                          XF86XK_AudioMedia,            TERCMD(ncmpcpp) },
 	{ 0,                          XF86XK_AudioMicMute,          cmd("mic-toggle") },
