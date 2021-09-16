@@ -103,7 +103,7 @@ Key keys[] = {
 	{ Super,                      XK_semicolon,                 mode(System, True) }, // Application launcher
 	{ Super|Shift,                XK_m,                         cmd("mic-toggle") },
 	{ Super,                      XK_c,                         cmd("clipmenu") }, // dmenu clipboard history manager
-	{ Super,                      XK_d,                         cmd("j4-dmenu-desktop --dmenu=\"dmenu -c -l 8 -bw 2\"") }, // Application launcher
+	{ Super,                      XK_d,                         cmd("j4-dmenu-desktop --dmenu=\"dmenu\"") }, // Application launcher
 	{ Super,                      XK_p,                         mode(Prompts, False) },
 	{ Super,                      XK_slash,                     mode(Cheatsheets, False) }, // Display cheatsheets
 	{ Super,                      XK_BackSpace,                 cmd("dm-power") }, // Powermenu
