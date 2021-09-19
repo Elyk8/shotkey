@@ -52,10 +52,11 @@ Key modes[MODE_SIZE][30] = {
 		{ 0, XK_e,          cmd("dm-emoji") }, // Emoji keyboard
 		{ 0, XK_k,          cmd("dm-kill") }, // Terminate applications
 		{ 0, XK_m,          cmd("dm-man") }, // Man pages list
-		{ 0, XK_n,          cmd("dm-notes") }, // Markdown notes manager
 		{ 0, XK_o,          cmd("dm-mount") }, // Mount drives, including USBs and a Android devices
 		{ 0, XK_p,          cmd("passmenu --type -p 'ﳳ :: '") }, // Password manager and autotyper
 		{ 0, XK_r,          cmd("dm-record") }, // Record using dmenu
+		{ 0, XK_s,          cmd("dm-styli.sh") }, // Settings random wallpapers
+		{ 0, XK_t,          cmd("todofi.sh")}, // Open rofi todo list
 		{ 0, XK_u,          cmd("dm-umount") }, // Unmount any drive
 		{ 0, XK_w,          cmd(TERM " -g 135x35 -n \"weatherdisplay\" -e weatherforecast") }, // Display the weather forecast
 	},
