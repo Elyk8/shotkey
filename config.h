@@ -29,24 +29,24 @@ enum {
 Key modes[MODE_SIZE][30] = {
 	// KEY MODES
 
-	// Cheatsheet mode. Toggle once using [Super+`]
+	// Cheatsheet mode. Toggle once using [Super+/].
 	[Cheatsheets] = {
-		{ 0,  XK_d,         cmd("dwmbindings") }, // dwm window managementbindings
-		{ 0,  XK_h,         cmd("shotkey-list") }, // shotkey applications key binds list
-		{ 0,  XK_t,         cmd("stbindings") }, // st terminal key bindings
+		{ 0,  XK_d,         cmd("dwm-keybindings") }, // dwm window managementbindings
+		{ 0,  XK_h,         cmd("shotkey-keybindings") }, // shotkey applications key binds list
+		{ 0,  XK_t,         cmd("st-keybindings") }, // st terminal key bindings
 	},
 
-	// Applications shortcuts. Toggle once using [Super+o]
+	// Applications shortcuts. Toggle once using [Super+o].
 	[Applications] = {
 		{ 0,  XK_w,         cmd("$BROWSER") },
 		{ 0,  XK_d,         cmd("discord --no-sandbox") },
 		{ 0,  XK_e,         TERCMD(neomutt; sb-refresh sb-mailbox) },
 		{ 0,  XK_l,         cmd(TERM " -e lf") }, // lf file manager with image previews
 		{ 0,  XK_n,         TERCMD(newsboat) },
-		{ 0,  XK_t,         TERCMD(gotop) }, // System usage terminal applications
+		{ 0,  XK_t,         TERCMD(btop) }, // System usage terminal applications
 	},
 
-	// dmenu scripts mode. Toggle once using [Super+p]
+	// dmenu scripts mode. Toggle once using [Super+p].
 	[Prompts] = {
 		{ 0, XK_b,          cmd("bookmarksurf") }, // Dmenu bookmarks manager
 		{ 0, XK_e,          cmd("dm-emoji") }, // Emoji keyboard
@@ -67,7 +67,7 @@ Key modes[MODE_SIZE][30] = {
 		{ 0, XK_f,          cmd("flameshot full -p ~/Pics/screenshots") },
 	},
 
-	// System shortcuts mode.
+	// System shortcuts mode. Use [;] to toggle.
 	[System] = {
 		{ 0,                XK_0,             cmd("mpc seek 0%") }, // Restart song
 		{ 0,                XK_bracketleft,   cmd("mpc seek -60") }, // Backward 60 secs
