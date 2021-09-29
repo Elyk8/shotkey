@@ -41,7 +41,7 @@ Key modes[MODE_SIZE][30] = {
 		{ 0,  XK_w,         cmd("$BROWSER") },
 		{ 0,  XK_d,         cmd("discord --no-sandbox") },
 		{ 0,  XK_e,         TERCMD(neomutt; sb-refresh sb-mailbox) },
-		{ 0,  XK_l,         cmd(TERM " -e lf") }, // lf file manager with image previews
+		{ 0,  XK_l,         cmd(TERM " -e lf-run") }, // lf file manager with image previews
 		{ 0,  XK_n,         TERCMD(newsboat) },
 		{ 0,  XK_t,         TERCMD(btop) }, // System usage terminal applications
 	},
@@ -63,8 +63,8 @@ Key modes[MODE_SIZE][30] = {
 
 	// Screenshot mode, using flameshot. Use [PrintScreen] to toggle once.
 	[Screenshot] = {
-		{ 0, XK_g,          cmd("flameshot gui -p ~/Pics/screenshots") },
-		{ 0, XK_f,          cmd("flameshot full -p ~/Pics/screenshots") },
+		{ 0, XK_g,          cmd("flameshot gui -p $XDG_PICTURES_DIR/screenshots") },
+		{ 0, XK_f,          cmd("flameshot full -p $XDG_PICTURES_DIR/screenshots") },
 	},
 
 	// System shortcuts mode. Use [;] to toggle.
@@ -74,7 +74,7 @@ Key modes[MODE_SIZE][30] = {
 		{ 0,                XK_bracketright,  cmd("mpc seek +60") }, // Forward 60 secs
 		{ 0,                XK_comma,         cmd("mpc seek -10") }, // Backward 10 secs
 		{ 0,                XK_period,        cmd("mpc seek +10") }, // Forward 10 secs
-		{ 0,                XK_a,             cmd("sxiv -r -q -t -o ~/Pics/wallpapers/*") },
+		{ 0,                XK_a,             cmd("sxiv -r -q -t -o $XDG_PICTURES_DIR/wallpapers/*") },
 		{ 0,                XK_b,             cmd("remaps; notify-send \"⌨️ Keyboard remapping...\" \"Re-running keyboard defaults for any newly plugged-in keyboards.\"") },
 		{ 0,                XK_c,             cmd("toggle-conky") },
 		{ 0,                XK_e,             WEBCAM },
@@ -89,7 +89,7 @@ Key modes[MODE_SIZE][30] = {
 		{ 0,                XK_s,             cmd("mpc pause ; pauseallmpv") }, // Stop
 		{ 0,                XK_u,             cmd("mpc shuffle") }, // Shuffle the playlist
 		{ 0,                XK_v,             cmd("pavucontrol; sb-refresh sb-volume") },
-		{ 0,                XK_w,             cmd("feh --randomize --bg-fill ~/Pics/wallpapers/*") },
+		{ 0,                XK_w,             cmd("feh --randomize --bg-fill $XDG_PICTURES_DIR/wallpapers/*") },
 	},
 };
 
@@ -117,7 +117,7 @@ Key keys[] = {
 	{ 0,                          XF86XK_Mail,                  TERCMD(neomutt; sb-refresh sb-mailbox) },
 	{ 0,                          XF86XK_MonBrightnessDown,     cmd("xbacklight -dec 2 ; sb-refresh sb-brightness") },
 	{ 0,                          XF86XK_MonBrightnessUp,       cmd("xbacklight -inc 2 ; sb-refresh sb-brightness") },
-	{ 0,                          XF86XK_MyComputer,            cmd(TERM " -e lf") },
+	{ 0,                          XF86XK_MyComputer,            cmd(TERM " -e lf-run") },
 	{ 0,                          XF86XK_PowerOff,              cmd("dm-power") },
 	{ 0,                          XF86XK_ScreenSaver,           cmd("slock & xset dpms force off; mpc pause; pauseallmpv") },
 	{ 0,                          XF86XK_Sleep,                 cmd("sudo -A zzz") },
