@@ -42,13 +42,18 @@ Key modes[MODE_SIZE][30] = {
 		{ 0,  XK_d,         cmd("discord --no-sandbox") },
 		{ 0,  XK_e,         TERCMD(neomutt; sb-refresh sb-mailbox) },
 		{ 0,  XK_l,         cmd(TERM " -e lf-run") }, // lf file manager with image previews
+		{ 0,  XK_m,         TERCMD(ncmpcpp; sb-refresh sb-music) },
 		{ 0,  XK_n,         TERCMD(newsboat) },
+		{ 0,  XK_o,         cmd("/usr/bin/obsidian") },
+		{ 0,  XK_p,         cmd("/usr/bin/tomate-gtk") },
 		{ 0,  XK_t,         TERCMD(btop) }, // System usage terminal applications
+		{ 0,  XK_v,         cmd("/usr/bin/vscodium") },
 	},
 
 	// dmenu scripts mode. Toggle once using [Super+p].
 	[Prompts] = {
-		{ 0, XK_b,          cmd("bookmarksurf") }, // Dmenu bookmarks manager
+		{ 0, XK_b,          cmd("dm-beats") }, // Radio FM
+		{ 0, XK_d,          cmd("dm-directories") }, // dmenu directories manager
 		{ 0, XK_e,          cmd("dm-emoji") }, // Emoji keyboard
 		{ 0, XK_k,          cmd("dm-kill") }, // Terminate applications
 		{ 0, XK_m,          cmd("dm-man") }, // Man pages list
@@ -99,12 +104,12 @@ Key keys[] = {
 
 	/* Mod                        Key                           Command */
 	// Applications
-	{ Super,                      XK_t,                         cmd(TERM " -d `xcwd`") }, // Spawn default terminal (st)
+	{ Super,                      XK_Return,                    cmd(TERM) }, // Spawn default terminal (st)
 	{ Super,                      XK_o,                         mode(Applications, False) }, // Application launcher
 	{ Super,                      XK_semicolon,                 mode(System, True) }, // Application launcher
 	{ Super|Shift,                XK_m,                         cmd("mic-toggle") },
-	{ Super,                      XK_c,                         cmd("clipmenu") }, // dmenu clipboard history manager
-	{ Super,                      XK_d,                         cmd("j4-dmenu-desktop --dmenu=\"dmenu\"") }, // Application launcher
+	{ Super,                      XK_c,                         cmd("clipster -sc") },
+	{ Super,                      XK_d,                         cmd("j4-dmenu-desktop --dmenu=\"dmenu -c -l 8 -bw 2\"") }, // Application launcher
 	{ Super,                      XK_p,                         mode(Prompts, False) },
 	{ Super,                      XK_slash,                     mode(Cheatsheets, False) }, // Display cheatsheets
 	{ Super,                      XK_BackSpace,                 cmd("dm-power") }, // Powermenu
@@ -121,7 +126,7 @@ Key keys[] = {
 	{ 0,                          XF86XK_PowerOff,              cmd("dm-power") },
 	{ 0,                          XF86XK_ScreenSaver,           cmd("slock & xset dpms force off; mpc pause; pauseallmpv") },
 	{ 0,                          XF86XK_Sleep,                 cmd("sudo -A zzz") },
-	{ 0,                          XF86XK_TaskPane,              TERCMD(gotop) },
+	{ 0,                          XF86XK_TaskPane,              TERCMD(btop) },
 	{ 0,                          XF86XK_TouchpadOff,           cmd("synclient TouchpadOff=1") },
 	{ 0,                          XF86XK_TouchpadOn,            cmd("synclient TouchpadOff=0") },
 	{ 0,                          XF86XK_TouchpadToggle,        cmd("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") },
@@ -146,12 +151,12 @@ Key keys[] = {
 };
 
 ModeProperties mode_properties[MODE_SIZE] = {
-	[Applications] = { "Apps" },
-	[Cheatsheets] = { "Cheatsheet" },
-	[Prompts] = { "Prompts" },
-	[Screenshot] = { "Screenshot" },
-	[System] = { "System" },
+	[Applications] = { "🎮 Apps" },
+	[Cheatsheets] = { "🚁 Cheatsheet" },
+	[Prompts] = { "📓 Prompts" },
+	[Screenshot] = { "📸 Screenshot" },
+	[System] = { "⚙️ System" },
 };
 
 // Call this script on mode change
-char* on_mode_change = "shotkey-mode on-mode-change";
+char* on_mode_change = "$HOME/.local/bin/scripts/shotkey-mode on-mode-change";
