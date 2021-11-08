@@ -7,9 +7,8 @@ char shell[] = "/bin/sh";
 #define Shift ShiftMask
 #define Ctrl ControlMask
 #define Alt Mod1Mask
-#define TERM "st"
+#define TERM "alacritty"
 
-#define TERCMD(str) cmd(TERM " -e " #str)
 #define WEBCAM cmd("mpv --no-cache --no-osc --no-input-default-bindings --profile=low-latency --untimed --vf=hflip --no-keepaspect-window --panscan=1 --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)")
 #define NOOP cmd("")
 
@@ -40,13 +39,12 @@ Key modes[MODE_SIZE][30] = {
 	[Applications] = {
 		{ 0,  XK_w,         cmd("$BROWSER") },
 		{ 0,  XK_d,         cmd("discord --no-sandbox") },
-		{ 0,  XK_e,         TERCMD(neomutt; sb-refresh sb-mailbox) },
+		{ 0,  XK_e,         cmd(TERM " -e neomutt; duskc --ignore-reply run_command setstatus 4 \"$(sb-mailbox)\"") },
 		{ 0,  XK_l,         cmd(TERM " -e lf-run") }, // lf file manager with image previews
-		{ 0,  XK_m,         TERCMD(ncmpcpp; sb-refresh sb-music) },
-		{ 0,  XK_n,         TERCMD(newsboat) },
+		{ 0,  XK_m,         cmd(TERM " --class music -e ncmpcpp") },
+		{ 0,  XK_n,         cmd(TERM " -e newsboat") },
 		{ 0,  XK_o,         cmd("/usr/bin/obsidian") },
-		{ 0,  XK_p,         cmd("/usr/bin/tomate-gtk") },
-		{ 0,  XK_t,         TERCMD(btop) }, // System usage terminal applications
+		{ 0,  XK_t,         cmd(TERM " -e btop") }, // System usage terminal applications
 		{ 0,  XK_v,         cmd("/usr/bin/vscodium") },
 	},
 
@@ -60,10 +58,10 @@ Key modes[MODE_SIZE][30] = {
 		{ 0, XK_o,          cmd("dm-mount") }, // Mount drives, including USBs and a Android devices
 		{ 0, XK_p,          cmd("passmenu --type -p 'ﳳ :: '") }, // Password manager and autotyper
 		{ 0, XK_r,          cmd("dm-record") }, // Record using dmenu
-		{ 0, XK_s,          cmd("dm-styli.sh") }, // Settings random wallpapers
+		{ 0, XK_s,          cmd("dm-scripts") }, // Find and edit scripts
 		{ 0, XK_t,          cmd("todofi.sh")}, // Open rofi todo list
 		{ 0, XK_u,          cmd("dm-umount") }, // Unmount any drive
-		{ 0, XK_w,          cmd(TERM " -g 135x35 -n \"weatherdisplay\" -e weatherforecast") }, // Display the weather forecast
+		{ 0, XK_w,          cmd(TERM " -t \"weatherdisplay\" -e weatherforecast") }, // Display the weather forecast
 	},
 
 	// Screenshot mode, using flameshot. Use [PrintScreen] to toggle once.
@@ -93,7 +91,7 @@ Key modes[MODE_SIZE][30] = {
 		{ 0,                XK_r,             cmd("mpc repeat") }, // Toggle repeat mode
 		{ 0,                XK_s,             cmd("mpc pause ; pauseallmpv") }, // Stop
 		{ 0,                XK_u,             cmd("mpc shuffle") }, // Shuffle the playlist
-		{ 0,                XK_v,             cmd("pavucontrol; sb-refresh sb-volume") },
+		{ 0,                XK_v,             cmd("pavucontrol") },
 		{ 0,                XK_w,             cmd("feh --randomize --bg-fill $XDG_PICTURES_DIR/wallpapers/*") },
 	},
 };
@@ -108,55 +106,54 @@ Key keys[] = {
 	{ Super,                      XK_o,                         mode(Applications, False) }, // Application launcher
 	{ Super,                      XK_semicolon,                 mode(System, True) }, // Application launcher
 	{ Super|Shift,                XK_m,                         cmd("mic-toggle") },
-	{ Super,                      XK_c,                         cmd("clipster -sc") },
 	{ Super,                      XK_d,                         cmd("j4-dmenu-desktop --dmenu=\"dmenu -c -l 8 -bw 2\"") }, // Application launcher
 	{ Super,                      XK_p,                         mode(Prompts, False) },
 	{ Super,                      XK_slash,                     mode(Cheatsheets, False) }, // Display cheatsheets
-	{ Super,                      XK_BackSpace,                 cmd("dm-power") }, // Powermenu
+	// { Super,                      XK_BackSpace,                 cmd("dm-power") }, // Powermenu
 
 	// System
 	/* { 0,                          XF86XK_Battery,               cmd("") }, */
-	{ 0,                          XF86XK_Calculator,            TERCMD(bc -l) },
-	{ 0,                          XF86XK_DOS,                   cmd(TERM) },
-	{ 0,                          XF86XK_Launch1,               cmd("xset dpms force off") },
-	{ 0,                          XF86XK_Mail,                  TERCMD(neomutt; sb-refresh sb-mailbox) },
-	{ 0,                          XF86XK_MonBrightnessDown,     cmd("xbacklight -dec 2 ; sb-refresh sb-brightness") },
-	{ 0,                          XF86XK_MonBrightnessUp,       cmd("xbacklight -inc 2 ; sb-refresh sb-brightness") },
-	{ 0,                          XF86XK_MyComputer,            cmd(TERM " -e lf-run") },
-	{ 0,                          XF86XK_PowerOff,              cmd("dm-power") },
-	{ 0,                          XF86XK_ScreenSaver,           cmd("slock & xset dpms force off; mpc pause; pauseallmpv") },
-	{ 0,                          XF86XK_Sleep,                 cmd("sudo -A zzz") },
-	{ 0,                          XF86XK_TaskPane,              TERCMD(btop) },
-	{ 0,                          XF86XK_TouchpadOff,           cmd("synclient TouchpadOff=1") },
-	{ 0,                          XF86XK_TouchpadOn,            cmd("synclient TouchpadOff=0") },
-	{ 0,                          XF86XK_TouchpadToggle,        cmd("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") },
-	{ 0,                          XF86XK_WWW,                   cmd("$BROWSER") },
+	// { 0,                          XF86XK_Calculator,            cmd(TERM " -e bc -l") },
+	// { 0,                          XF86XK_DOS,                   cmd(TERM) },
+	// { 0,                          XF86XK_Launch1,               cmd("xset dpms force off") },
+	// { 0,                          XF86XK_Mail,                  cmd(TERM " -e neomutt; duskc --ignore-reply run_command setstatus 4 \"$(sb-mailbox)\"") },
+	// { 0,                          XF86XK_MonBrightnessDown,     cmd("brightness down") },
+	// { 0,                          XF86XK_MonBrightnessUp,       cmd("brightness up") },
+	// { 0,                          XF86XK_MyComputer,            cmd(TERM " -e lf-run") },
+	// { 0,                          XF86XK_PowerOff,              cmd("dm-power") },
+	// { 0,                          XF86XK_ScreenSaver,           cmd("slock & xset dpms force off; mpc pause; pauseallmpv") },
+	// { 0,                          XF86XK_Sleep,                 cmd("sudo -A zzz") },
+	// { 0,                          XF86XK_TaskPane,              cmd(TERM " -e btop") },
+	// { 0,                          XF86XK_TouchpadOff,           cmd("synclient TouchpadOff=1") },
+	// { 0,                          XF86XK_TouchpadOn,            cmd("synclient TouchpadOff=0") },
+	// { 0,                          XF86XK_TouchpadToggle,        cmd("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") },
+	// { 0,                          XF86XK_WWW,                   cmd("$BROWSER") },
 
 	// Media controls
-	{ 0,                          XF86XK_AudioForward,          cmd("mpc seek +10") },
-	{ 0,                          XF86XK_AudioLowerVolume,      cmd("pamixer --allow-boost -d 3; sb-refresh sb-volume ; canberra-gtk-play -i audio-volume-change") },
-	{ 0,                          XF86XK_AudioMedia,            TERCMD(ncmpcpp) },
-	{ 0,                          XF86XK_AudioMicMute,          cmd("mic-toggle") },
-	{ 0,                          XF86XK_AudioMute,             cmd("pamixer -t; sb-refresh sb-volume") },
-	{ 0,                          XF86XK_AudioNext,             cmd("mpc next") },
-	{ 0,                          XF86XK_AudioPause,            cmd("mpc pause") },
-	{ 0,                          XF86XK_AudioPlay,             cmd("mpc play") },
-	{ 0,                          XF86XK_AudioPrev,             cmd("mpc prev") },
-	{ 0,                          XF86XK_AudioRaiseVolume,      cmd("pamixer -u; pamixer --allow-boost -i 3; sb-refresh sb-volume; canberra-gtk-play -i audio-volume-change") },
-	{ 0,                          XF86XK_AudioRewind,           cmd("mpc seek -10") },
-	{ 0,                          XF86XK_AudioStop,             cmd("mpc stop") },
+	// { 0,                          XF86XK_AudioForward,          cmd("mpc seek +10") },
+	// { 0,                          XF86XK_AudioLowerVolume,      cmd("volume down") },
+	// { 0,                          XF86XK_AudioMedia,            cmd(TERM " -e ncmpcpp") },
+	// { 0,                          XF86XK_AudioMicMute,          cmd("mic-toggle") },
+	// { 0,                          XF86XK_AudioMute,             cmd("volume mute") },
+	// { 0,                          XF86XK_AudioNext,             cmd("mpc next") },
+	// { 0,                          XF86XK_AudioPause,            cmd("mpc pause") },
+	// { 0,                          XF86XK_AudioPlay,             cmd("mpc play") },
+	// { 0,                          XF86XK_AudioPrev,             cmd("mpc prev") },
+	// { 0,                          XF86XK_AudioRaiseVolume,      cmd("volume up") },
+	// { 0,                          XF86XK_AudioRewind,           cmd("mpc seek -10") },
+	// { 0,                          XF86XK_AudioStop,             cmd("mpc stop") },
 
 	// Screenshot
 	{ 0,                          XK_Print,                     mode(Screenshot, False) }, // Toggle flameshot mode
 };
 
 ModeProperties mode_properties[MODE_SIZE] = {
-	[Applications] = { "🎮 Apps" },
-	[Cheatsheets] = { "🚁 Cheatsheet" },
-	[Prompts] = { "📓 Prompts" },
-	[Screenshot] = { "📸 Screenshot" },
-	[System] = { "⚙️ System" },
+	[Applications] = { "🎮" },
+	[Cheatsheets] = { "🚁" },
+	[Prompts] = { "📓" },
+	[Screenshot] = { "📸" },
+	[System] = { "⚙️" },
 };
 
 // Call this script on mode change
-char* on_mode_change = "$HOME/.local/bin/scripts/shotkey-mode on-mode-change";
+char* on_mode_change = "";
