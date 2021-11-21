@@ -18,7 +18,6 @@ enum {
 	Cheatsheets,
 	Prompts,
 	System,
-	Emacs,
 	Music,
 
 	// Declare modes above this
@@ -75,12 +74,12 @@ Key modes[MODE_SIZE][30] = {
 
 	[Music] = {
 		{ 0,                XK_0,             cmd("mpc seek 0%") }, // Restart song
-		{ 0,                XK_bracketleft,   cmd("mpc seek -60") }, // Backward 60 secs
-		{ 0,                XK_bracketright,  cmd("mpc seek +60") }, // Forward 60 secs
-		{ 0,                XK_comma,         cmd("mpc seek -10") }, // Backward 10 secs
-		{ 0,                XK_period,        cmd("mpc seek +10") }, // Forward 10 secs
-		{ 0,                XK_h,             cmd("mpc prev") }, // Previous song
-		{ 0,                XK_l,             cmd("mpc next") }, // Next song
+		{ 0,                XK_comma,         cmd("mpc seek -60") }, // Backward 60 secs
+		{ 0,                XK_period,        cmd("mpc seek +60") }, // Forward 60 secs
+		{ 0,                XK_h,             cmd("mpc seek -10") }, // Backward 10 secs
+		{ 0,                XK_l,             cmd("mpc seek +10") }, // Forward 10 secs
+		{ 0,                XK_bracketleft,   cmd("mpc prev") }, // Previous song
+		{ 0,                XK_bracketright,  cmd("mpc next") }, // Next song
 		{ 0,                XK_j,             cmd("mpc volume -3") }, // Volume down -3
 		{ 0,                XK_k,             cmd("mpc volume +3") }, // Volume up +3
 		{ Shift,            XK_j,             cmd("mpc volume -12") }, // Volume down -12
@@ -90,17 +89,6 @@ Key modes[MODE_SIZE][30] = {
 		{ 0,                XK_s,             cmd("mpc pause ; pauseallmpv") }, // Stop
 		{ 0,                XK_u,             cmd("mpc shuffle") }, // Shuffle the playlist
 	},
-
-	[Emacs] = {
-    	{ 0,                XK_e,             cmd(EMACS " --eval '(dashboard-refresh-buffer)'") },
-    	{ 0,                XK_b,             cmd(EMACS " --eval '(ibuffer)'") },
-    	{ 0,                XK_d,             cmd(EMACS " --eval '(dired nil)'") },
-    	{ 0,                XK_i,             cmd(EMACS " --eval '(erc)'") },
-    	{ 0,                XK_n,             cmd(EMACS " --eval '(elfeed)'") },
-    	{ 0,                XK_s,             cmd(EMACS " --eval '(eshell)'") },
-    	{ 0,                XK_t,             cmd(EMACS " --eval '(mastodon)'") },
-    	{ 0,                XK_v,             cmd(EMACS " --eval '(+vterm/here nil)'") },
-	},
 };
 
 Key keys[] = {
@@ -108,7 +96,7 @@ Key keys[] = {
 
 	/* Mod                        Key                           Command */
 	// Applications
-	{ Super,                      XK_Return,                    cmd(TERM) }, // Spawn default terminal (st)
+	{ Super,                      XK_Return,                    cmd(TERM " --working-directory ~") }, // Spawn default terminal (st)
 	{ Super,                      XK_o,                         mode(Applications, False) }, // Application launcher
 	{ Super,                      XK_semicolon,                 mode(System, True) }, // Application launcher
 	{ Super,                      XK_m,                         mode(Music, True) }, // Application launcher
@@ -116,7 +104,6 @@ Key keys[] = {
 	{ Super,                      XK_d,                         cmd("$HOME/.config/rofi/scripts/launcher.sh") }, // Application launcher
 	{ Super,                      XK_p,                         mode(Prompts, False) },
 	{ Super,                      XK_slash,                     mode(Cheatsheets, False) }, // Display cheatsheets
-	{ Super,                      XK_e,                         mode(Emacs, False) }, // Emacs
 
 	// System
 	/* { 0,                          XF86XK_Battery,               cmd("") }, */
@@ -157,7 +144,6 @@ ModeProperties mode_properties[MODE_SIZE] = {
 	[Prompts] = { "Prompts" },
 	[System] = { "System" },
 	[Music] = { "Music" },
-	[Emacs] = { "Emacs" },
 };
 
 // Call this script on mode change
