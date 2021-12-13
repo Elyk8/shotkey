@@ -25,7 +25,6 @@ shotkey: ${OBJ}
 
 clean:
 	rm -f shotkey ${OBJ}
-	killall shotkey
 
 install: all
 	mkdir -p ${DESTDIR}${PREFIX}/bin
