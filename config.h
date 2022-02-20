@@ -8,6 +8,7 @@ char shell[] = "/bin/sh";
 #define Ctrl ControlMask
 #define Alt Mod1Mask
 #define TERM "alacritty"
+#define EMACS "emacsclient -c -a 'emacs'"
 
 #define WEBCAM cmd("mpv --no-cache --no-osc --no-input-default-bindings --profile=low-latency --untimed --vf=hflip --no-keepaspect-window --panscan=1 --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)")
 #define NOOP cmd("")
@@ -19,7 +20,7 @@ enum {
 	Screenshot,
 	System,
 	Music,
-	Terminal,
+	Emacs,
 
 	// Declare modes above this
 	MODE_SIZE,
@@ -41,6 +42,7 @@ Key modes[MODE_SIZE][30] = {
 		{ 0,  XK_w,         cmd("$BROWSER") },
 		{ 0,  XK_d,         cmd("/usr/bin/discord --no-sandbox") },
 		{ 0,  XK_e,         cmd("/usr/bin/thunderbird") },
+		{ 0,  XK_f,         cmd("/media/ftb/FTBApp") },
 		{ 0,  XK_o,         cmd("env DESKTOPINTEGRATION=false /usr/bin/obsidian --no-sandbox") },
 		{ 0,  XK_t,         cmd("env DESKTOPINTEGRATION=false /usr/bin/todoist --no-sandbox") },
 		{ 0,  XK_v,         cmd("/usr/bin/vscodium") },
@@ -48,15 +50,15 @@ Key modes[MODE_SIZE][30] = {
 
 	// dmenu scripts mode. Toggle once using [Super+p].
 	[Prompts] = {
-		{ 0, XK_b,          cmd("dm-beats") }, // Radio FM
-		{ 0, XK_c,          cmd("dm-clip") },
+		{ 0, XK_b,          cmd("rofi-buku") }, // Bookmark manager
+		{ 0, XK_c,          cmd("dm-clip") }, // Clips clipboard
 		{ 0, XK_d,          cmd("dm-directories") }, // dmenu directories manager
 		{ 0, XK_e,          cmd("dm-emoji") }, // Emoji keyboard
 		{ 0, XK_k,          cmd("dm-kill") }, // Terminate applications
 		{ 0, XK_m,          cmd("dm-man") }, // Man pages list
 		{ 0, XK_o,          cmd("dm-mount") }, // Mount drives, including USBs and a Android devices
 		{ 0, XK_p,          cmd("rofi-pass") }, // Password manager and autotyper
-		{ 0, XK_r,          cmd("dm-record") }, // Record using dmenu
+		{ 0, XK_r,          cmd("dm-beats") }, // Radio FM
 		{ 0, XK_s,          cmd("dm-scripts") }, // Find and edit scripts
 		{ 0, XK_u,          cmd("dm-umount") }, // Unmount any drive
 		{ 0, XK_w,          cmd("weatherforecast") }, // Display the weather forecast
@@ -70,10 +72,11 @@ Key modes[MODE_SIZE][30] = {
 
 	// System shortcuts mode. Use [;] to toggle once.
 	[System] = {
-		{ 0,                XK_a,             cmd("nsxiv -rqto $XDG_PICTURES_DIR/wallpapers/*") },
-		{ 0,                XK_m,             cmd("multi-monitor") },
-		{ 0,                XK_w,             cmd("setwallpaper") },
+		{ 0,                XK_a,             cmd("setwallpaper a2n") },
+		{ 0,                XK_d,             cmd("setwallpaper dt") },
+		{ 0,                XK_e,             cmd("setwallpaper elyk") },
 		{ 0,                XK_v,             cmd("pavucontrol") },
+		{ 0,                XK_w,             cmd("nsxiv -rqto $XDG_PICTURES_DIR/wallpapers/*") },
 	},
 
 	// Music shortcuts. Use [m] to toggle
@@ -95,10 +98,12 @@ Key modes[MODE_SIZE][30] = {
 		{ 0,                XK_u,             cmd("mpc shuffle") }, // Shuffle the playlist
 	},
 
-	// Terminal applications shortcuts. Use [e] to toggle once.
-	[Terminal] = {
-		{ 0,                XK_e,             cmd(TERM " -e lvim") }, // Launch lunarvim
-		{ 0,                XK_n,             cmd(TERM " -e newsboat") }, // Launch lunarvim
+	// Emacs shortcuts. Use [e] to toggle once.
+	[Emacs] = {
+		{ 0,                XK_e,             cmd(EMACS " --eval '(dashboard-refresh-buffer)'") }, // Emacs dashboard
+		{ 0,                XK_b,             cmd(EMACS " --eval '(ibuffer)'") }, // Emacs list buffers
+		{ 0,                XK_d,             cmd(EMACS " --eval '(dired nil)'") }, // Emacs dired
+		{ 0,                XK_n,             cmd(EMACS " --eval '(elfeed)'") }, // gmacs elfeed rss
 	},
 
 
@@ -110,7 +115,7 @@ Key keys[] = {
 	/* Mod                        Key                           Command */
 	// Applications
 	{ Super,                      XK_Return,                    cmd(TERM " --working-directory ~") }, // Spawn default terminal (st)
-	{ Super,                      XK_e,                         mode(Terminal, False) }, // Application launcher
+	{ Super,                      XK_e,                         mode(Emacs, False) }, // Application launcher
 	{ Super,                      XK_o,                         mode(Applications, False) }, // Application launcher
 	{ Super,                      XK_semicolon,                 mode(System, False) }, // Application launcher
 	{ Super,                      XK_m,                         mode(Music, True) }, // Application launcher
@@ -164,7 +169,7 @@ ModeProperties mode_properties[MODE_SIZE] = {
 	[Screenshot] = { "Screenshot" },
 	[System] = { "System" },
 	[Music] = { "Music" },
-	[Terminal] = { "Terminal" },
+	[Emacs] = { "Emacs" },
 };
 
 // Call this script on mode change
